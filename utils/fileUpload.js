@@ -1,2 +1,2 @@
 // File Upload Utility
-module.exports = (file) => { /* File upload logic */ };
+export default file => { /* File upload logic */ };

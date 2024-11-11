@@ -1,6 +1,6 @@
 // Database connection setup for MongoDB and MySQL
-const mongoose = require('mongoose');
-const mysql = require('mysql2/promise');
+import mongoose from 'mongoose';
+import mysql from 'mysql2/promise';
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -13,4 +13,4 @@ const mysqlConnection = mysql.createPool({
   database: process.env.MYSQL_DB,
 });
 
-module.exports = { mongoose, mysqlConnection };
+export { mongoose, mysqlConnection };

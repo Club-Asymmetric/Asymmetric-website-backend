@@ -1,8 +1,8 @@
 // MongoDB Event Schema
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const eventSchema = new mongoose.Schema({
     title: String,
     date: Date,
     description: String
 });
-module.exports = mongoose.model('Event', eventSchema);
+export default mongoose.model('Event', eventSchema);

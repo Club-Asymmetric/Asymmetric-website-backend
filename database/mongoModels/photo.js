@@ -4,4 +4,4 @@ const photoSchema = new mongoose.Schema({
     url: String,
     description: String
 });
-module.exports = mongoose.model('Photo', photoSchema);
+export default mongoose.model('Photo', photoSchema);

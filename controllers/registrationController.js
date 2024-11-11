@@ -1,1 +1,1 @@
-exports.registerUser = (req, res) => { /* Implement logic */ };
+export const registerUser = (req, res) => { /* Implement logic */ };

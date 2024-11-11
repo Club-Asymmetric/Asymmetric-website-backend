@@ -1,2 +1,2 @@
 // Validation Middleware
-module.exports = (req, res, next) => { /* Input validation logic */ };
+export default (req, res, next) => { /* Input validation logic */ };
