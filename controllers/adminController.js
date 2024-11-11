@@ -1,3 +1,3 @@
-exports.viewRegistrations = (req, res) => { /* Implement logic */ };
-exports.viewEvents = (req, res) => { /* Implement logic */ };
-exports.viewPhotos = (req, res) => { /* Implement logic */ };
+export const viewRegistrations = (req, res) => { /* Implement logic */ };
+export const viewEvents = (req, res) => { /* Implement logic */ };
+export const viewPhotos = (req, res) => { /* Implement logic */ };

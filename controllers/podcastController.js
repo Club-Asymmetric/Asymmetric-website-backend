@@ -1,2 +1,2 @@
-exports.getAllPodcasts = (req, res) => { /* Implement logic */ };
-exports.createPodcast = (req, res) => { /* Implement logic */ };
+export const getAllPodcasts = (req, res) => { /* Implement logic */ };
+export const createPodcast = (req, res) => { /* Implement logic */ };

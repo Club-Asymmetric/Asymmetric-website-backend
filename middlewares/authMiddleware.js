@@ -1,2 +1,2 @@
 // Middleware for Admin Authentication
-module.exports = (req, res, next) => { /* Authentication Logic */ };
+export default (req, res, next) => { /* Authentication Logic */ };
