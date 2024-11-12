@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 async function sendEmail(subject, body, to) {
     // Set up the SMTP server configuration
