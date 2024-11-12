@@ -1,22 +1,10 @@
-import { Surreal } from "surrealdb";
-import { surrealdbNodeEngines } from "@surrealdb/node";
+import database from "./database.js";
 import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
 
-const db = new Surreal({
-  engines: surrealdbNodeEngines(),
-});
+const db = await database("event_registrations");
 try {
-  await db.connect("http://localhost:8000/rpc", {
-    namespace: "asymmetric",
-    database: "events_registrations",
-    auth: {
-      username: "root",
-      password: "root",
-    },
-  });
-  console.log("connected to surrealdb");
   await db.query(
     fs.readFileSync(
       path.dirname(fileURLToPath(import.meta.url)) +
@@ -26,7 +14,7 @@ try {
   );
 } catch (error) {
   console.error(
-    "failed to connect to surrealdb",
+    "failed to migrate to surrealdb",
     error instanceof Error ? error.message : String(error)
   );
 } finally {

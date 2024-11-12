@@ -4,12 +4,16 @@ import eventRoutes from "./routes/eventRoutes.js";
 import podcastRoutes from "./routes/podcastRoutes.js";
 import registrationRoutes from "./routes/registrationRoutes.js";
 import logger from "./middlewares/logger.js";
+import errorHandler from "./errors/errorHandler.js";
 import { fileURLToPath } from "url";
 import path from "path";
 
 let app = express();
 
-app.use(logger("root"));
+app.use((req, res, next) => {
+  logger.info(`${req.method} ${req.url}`);
+  next();
+});
 app.use("/admin", adminRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);
@@ -22,12 +26,11 @@ app.get("/", (req, res) =>
 );
 
 app.use((req, res, next) => {
-    next(new NotFoundError());
+  next(new NotFoundError());
 });
 
 // Centralized Error Handler
 app.use(errorHandler);
-
 
 app.listen(3000, () => {
   console.log("Server started on port 3000");
