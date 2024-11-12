@@ -21,6 +21,14 @@ app.get("/", (req, res) =>
   })
 );
 
+app.use((req, res, next) => {
+    next(new NotFoundError());
+});
+
+// Centralized Error Handler
+app.use(errorHandler);
+
+
 app.listen(3000, () => {
   console.log("Server started on port 3000");
 });
