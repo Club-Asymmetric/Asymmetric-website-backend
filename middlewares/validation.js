@@ -1,2 +1,4 @@
 // Validation Middleware
-export default (req, res, next) => { /* Input validation logic */ };
+export default (req, res, next) => {
+  /* Input validation logic */
+};

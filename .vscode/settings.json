@@ -1,4 +1,6 @@
 {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
     "[javascript]": {
         "editor.suggest.showModules": true,
         "outline.showModules": true,
