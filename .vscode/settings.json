@@ -1,0 +1,8 @@
+{
+    "[javascript]": {
+        "editor.suggest.showModules": true,
+        "outline.showModules": true,
+        "breadcrumbs.showModules": true,
+        "javascript.preferences.importModuleSpecifierEnding": "js"
+    }
+}
