@@ -12,3 +12,21 @@ DEFINE FIELD event_date ON registration TYPE datetime VALUE time::group($value, 
 DEFINE FIELD department ON registration TYPE string;
 DEFINE FIELD college ON registration TYPE string;
 DEFINE FIELD mail ON registration TYPE string ASSERT string::is::email($value);
+DEFINE FIELD event ON registration TYPE record<event>;
+
+// Test Data
+CREATE event CONTENT {
+    name: "tales_of_threats",
+    participants: 100,
+    date: time::now(),
+};
+CREATE event CONTENT {
+    name: "horror_codes",
+    participants: 150,
+    date: time::now() + 2w,
+};
+CREATE event CONTENT {
+    name: "noice_workshop",
+    participants: 10,
+    date: time::now() + 1w,
+};

@@ -2,14 +2,17 @@ import express from "express";
 import logger from "../middlewares/logger.js";
 const router = express.Router();
 
-import { getEvent, getAllEvents } from "../database/models.js";
+import { getEvent, getAllEvents } from "../models/event.js";
 
-router.use(logger("events"));
-router.get("/:name", (req, res) => {
-  return res.json(getAllEvents());
+router.use((req, res, next) => {
+  logger.info(`${req.method} ${req.url}`);
+  next();
 });
-router.get("/", (req, res) => {
-  return res.json(getEvent(req.params.name));
+router.get("/:name", async (req, res) => {
+  return res.json(await getEvent(req.params.name));
+});
+router.get("/", async (req, res) => {
+  return res.json(await getAllEvents());
 });
 
 export default router;

@@ -13,7 +13,7 @@
           const ul = document.getElementById("events");
           for (let event of obj) {
             let li = document.createElement("li");
-            li.innerText = `${event.name} ${event.organiser} ${event.datetime}`;
+            li.innerText = `${event.name} ${event.participants} ${event.date}`;
             ul.appendChild(li);
           }
         } else alert("You fked up.! Try Again >:(");
