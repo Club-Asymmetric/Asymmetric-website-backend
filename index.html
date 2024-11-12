@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Asymmetric Testing</title>
-</head>
-<body>
-  <ul id="events"></ul>
-  <script>
-    (async () => {
-      const response = await fetch('/api/events');
-      if (response.ok) {
-        const obj = await response.json();
-        const ul = document.getElementById("events");
-        for (let event of obj) {
-          let li = document.createElement('li');
-          li.innerText = `${event.name} ${event.organiser} ${event.datetime}`;
-          ul.appendChild(li);
-        }
-      } else alert("You fked up.! Try Again >:(")
-    })()
-  </script>
-</body>
+  <head>
+    <title>Asymmetric Testing</title>
+  </head>
+  <body>
+    <ul id="events"></ul>
+    <script>
+      (async () => {
+        const response = await fetch("/api/events");
+        if (response.ok) {
+          const obj = await response.json();
+          const ul = document.getElementById("events");
+          for (let event of obj) {
+            let li = document.createElement("li");
+            li.innerText = `${event.name} ${event.organiser} ${event.datetime}`;
+            ul.appendChild(li);
+          }
+        } else alert("You fked up.! Try Again >:(");
+      })();
+    </script>
+  </body>
 </html>
