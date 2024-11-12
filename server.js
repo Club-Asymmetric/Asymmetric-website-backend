@@ -17,6 +17,14 @@ app.use("/api/registrations", registrationRoutes);
 
 app.get("/", (req, res) => res.sendFile("index.html", { root: path.dirname(fileURLToPath(import.meta.url)) }));
 
+app.use((req, res, next) => {
+    next(new NotFoundError());
+});
+
+// Centralized Error Handler
+app.use(errorHandler);
+
+
 app.listen(3000, () => {
     console.log("Server started on port 3000");
 });
