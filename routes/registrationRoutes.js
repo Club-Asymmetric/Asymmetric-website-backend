@@ -1,6 +1,8 @@
-import express from 'express';
+import express from "express";
 const router = express.Router();
 
-router.post('/', (req, res) => { /* Implement logic */ });
+router.post("/", (req, res) => {
+  /* Implement logic */
+});
 
 export default router;
