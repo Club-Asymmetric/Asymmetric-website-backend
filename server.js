@@ -3,6 +3,7 @@ import adminRoutes from "./routes/adminRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import podcastRoutes from "./routes/podcastRoutes.js";
 import registrationRoutes from "./routes/registrationRoutes.js";
+import photoRoutes from "./routes/photoRoutes.js";
 import { logging } from "./middlewares/logger.js";
 import errorHandler from "./errors/errorHandler.js";
 import { NotFoundError } from "./errors/ApiError.js";
@@ -17,6 +18,9 @@ app.use("/admin", adminRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);
 app.use("/api/registrations", registrationRoutes);
+
+// TODO: @cosmic-stricker Increase Security
+app.use("/if/you/get/these/images/you/are/gay", photoRoutes);
 
 app.get("/", (req, res) =>
   res.sendFile("index.html", {
