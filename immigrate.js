@@ -8,7 +8,14 @@ try {
   await db.query(
     fs.readFileSync(
       path.dirname(fileURLToPath(import.meta.url)) +
-        "/migrations/eventregistration-down.surql",
+        "/migrations/event_registration_down.surql",
+      { encoding: "utf-8" }
+    )
+  );
+  await db.query(
+    fs.readFileSync(
+      path.dirname(fileURLToPath(import.meta.url)) +
+        "/migrations/podcast_down.surql",
       { encoding: "utf-8" }
     )
   );
