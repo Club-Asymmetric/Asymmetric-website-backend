@@ -1,11 +1,11 @@
 import database from "../database.js";
 
-const db = await database("event_registrations");
-
-export function getAllEvents() {
-  return db.select("event");
+export async function getAllEvents() {
+  return (await database()).select("event");
 }
 
-export function getEvent(name) {
-  return db.query(`SELECT * FROM event WHERE name=$name`, { name });
+export async function getEvent(name) {
+  return (await database()).query(`SELECT * FROM event WHERE name=$name`, {
+    name,
+  });
 }
