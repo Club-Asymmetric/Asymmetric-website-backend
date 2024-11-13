@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "migrate": "node migrate.js",
-    "immigrate": "node immigrate.js"
+    "migrate": "node commands/migrate.js",
+    "immigrate": "node commands/immigrate.js",
+    "tester": "node commands/tester.js",
+    "untester": "node commands/untester.js"
   },
   "keywords": [],
   "author": "",

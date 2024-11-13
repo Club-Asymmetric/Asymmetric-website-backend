@@ -8,6 +8,7 @@ import errorHandler from "./errors/errorHandler.js";
 import { ClientError, ServerError } from "./errors/ApiError.js";
 import { fileURLToPath } from "url";
 import path from "path";
+import database from "./database.js";
 
 let app = express();
 
@@ -30,6 +31,29 @@ app.use((req, res, next) => {
 // Centralized Error Handler
 app.use(errorHandler);
 
-app.listen(3000, () => {
+const server = app.listen(3000, () => {
   console.log("Server started on port 3000");
+});
+
+const cleaner = () => {
+  server.close(() => {
+    database().close;
+  });
+};
+
+process.on("SIGINT", cleaner);
+process.on("SIGTERM", cleaner);
+process.on("uncaughtException", (error) => {
+  console.error(
+    "Uncaught Exception:",
+    error instanceof Error ? error.message : String(error)
+  );
+  cleaner();
+});
+process.on("unhandledRejection", (error) => {
+  console.error(
+    "Unhandled Rejection:",
+    error instanceof Error ? error.message : String(error)
+  );
+  cleaner();
 });
