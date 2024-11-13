@@ -1,11 +1,12 @@
 import { Surreal } from "surrealdb";
 import { surrealdbNodeEngines } from "@surrealdb/node";
 
-const db = new Surreal({
-  engines: surrealdbNodeEngines(),
-});
-
+let db;
 export default async () => {
+  if (db) return db;
+  db = new Surreal({
+    engines: surrealdbNodeEngines(),
+  });
   try {
     await db.connect("surrealkv://asymmetric.db", {
       namespace: "asymmetric",
