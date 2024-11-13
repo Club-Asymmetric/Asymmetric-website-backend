@@ -4,7 +4,8 @@ const logger = winston.createLogger({
   level: "error",
   format: winston.format.combine(
     winston.format.timestamp(),
-    winston.format.json()
+    winston.format.cli(),
+    winston.format.metadata()
   ),
   transports: [
     new winston.transports.Console(),
@@ -12,4 +13,9 @@ const logger = winston.createLogger({
   ],
 });
 
-export default logger;
+const logging = (req, res, next) => {
+  logger.error(`${req.method} ${req.url}`);
+  next();
+};
+
+export { logger, logging };

@@ -1,12 +1,12 @@
 import { ApiError } from "./ApiError.js";
-import logger from "../middlewares/logger.js";
+import { logger } from "../middlewares/logger.js";
 
 const errorHandler = (err, req, res, next) => {
   const statusCode = err.status || 500;
   const message = err.message || "An unexpected error occurred";
 
   // Log the error
-  logger.error(`[${statusCode}] ${message}`);
+  logger.error(`[${statusCode}] ${message}    ${import.meta.url}`);
 
   // Respond with JSON error message
   res.status(statusCode).json({

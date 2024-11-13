@@ -1,14 +1,11 @@
 import express, { json } from "express";
-import logger from "../middlewares/logger.js";
+import { logging } from "../middlewares/logger.js";
 const router = express.Router();
 
 import { getEvent, getAllEvents } from "../models/event.js";
 import e from "express";
 
-router.use((req, res, next) => {
-  logger.info(`${req.method} ${req.url}`);
-  next();
-});
+router.use(logging);
 router.get("/:name", async (req, res) => {
   return res.json(await getEvent(req.params.name));
 });
@@ -20,7 +17,6 @@ router.get("/", async (req, res) => {
       events[i].photos[j] = btoa(String.fromCharCode(...new Uint8Array(p)));
     }
   }
-  console.log(events);
   return res.json(events);
 });
 
