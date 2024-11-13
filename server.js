@@ -3,17 +3,15 @@ import adminRoutes from "./routes/adminRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import podcastRoutes from "./routes/podcastRoutes.js";
 import registrationRoutes from "./routes/registrationRoutes.js";
-import logger from "./middlewares/logger.js";
+import { logging } from "./middlewares/logger.js";
 import errorHandler from "./errors/errorHandler.js";
+import { NotFoundError } from "./errors/ApiError.js";
 import { fileURLToPath } from "url";
 import path from "path";
 
 let app = express();
 
-app.use((req, res, next) => {
-  logger.info(`${req.method} ${req.url}`);
-  next();
-});
+app.use(logging);
 app.use("/admin", adminRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);
