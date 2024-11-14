@@ -6,25 +6,21 @@
   <body>
     <script>
       (async () => {
-        const response = await fetch("/api/events");
+        const response = await fetch("/api/podcasts");
         if (response.ok) {
           const obj = await response.json();
-          for (let event of obj) {
-            console.log(event);
+          for (let podcast of obj) {
             let h1 = document.createElement("h1");
-            h1.innerText = event.name;
+            h1.innerText = podcast.name;
             document.body.appendChild(h1);
             let p = document.createElement("p");
-            p.innerText = event.description;
+            p.innerText = podcast.description;
             document.body.appendChild(p);
-            for (let src of event.photos) {
-              console.log(src);
-              let img = document.createElement("img");
-              img.src = `/if/you/get/these/images/you/are/gay/${src}`;
-              document.body.appendChild(img);
-            }
+            let img = document.createElement("img");
+            img.src = `/if/you/get/these/images/you/are/gay/${podcast.image}`;
+            document.body.appendChild(img);
             p = document.createElement("p");
-            p.innerText = `Date: ${event.date}\tParticipants: ${event.participants}`;
+            p.innerText = `Publish: ${podcast.publish}\tGuest: ${podcast.guests}`;
             document.body.appendChild(p);
           }
         } else alert("You fked up.! Try Again >:(");
