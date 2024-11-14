@@ -1,4 +1,3 @@
-import { ApiError } from "./ApiError.js";
 import { logger } from "../middlewares/logger.js"; // Logger middleware
 
 // Error handler middleware

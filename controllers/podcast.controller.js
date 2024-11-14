@@ -1,15 +1,15 @@
-import { getPodcast, getAllPodcasts } from '../models/podcast.js';
+import { getPodcast, getAllPodcasts } from "../models/podcast.js";
 
-export const getPodcastByName = async (req, res) => {
+export const getPodcastById = async (req, res) => {
   try {
-    const podcast = await getPodcast(req.params.name);
+    const podcast = await getPodcast(req.params.id);
     res.json(podcast);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-export const getAllPodcasts = async (req, res) => {
+export const getPodcasts = async (req, res) => {
   try {
     let podcasts = await getAllPodcasts();
     for (let i in podcasts) {

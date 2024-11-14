@@ -22,5 +22,5 @@ try {
     error instanceof Error ? error.message : String(error)
   );
 } finally {
-  db.close();
+  await db.close();
 }

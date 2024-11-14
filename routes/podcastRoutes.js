@@ -1,12 +1,15 @@
-import express from 'express';
-import { getPodcastByName, getAllPodcasts } from '../models/podcast.js';
-import { logging } from '../middlewares/logger.js';
+import express from "express";
+import {
+  getPodcasts,
+  getPodcastById,
+} from "../controllers/podcast.controller.js";
+import { logging } from "../middlewares/logger.js";
 const router = express.Router();
 
 router.use(logging);
 
-router.get('/:name', getPodcastByName);
+router.get("/:id", getPodcastById);
 
-router.get('/', getAllPodcasts);
+router.get("/", getPodcasts);
 
 export default router;
