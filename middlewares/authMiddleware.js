@@ -1,4 +1,8 @@
-// Middleware for Admin Authentication
-export default (req, res, next) => {
-  /* Authentication Logic */
+// Middleware for Admin Authorization
+export const authorizeAdmin = (req, res, next) => {
+  if (req.user && req.user.role === "admin") {
+    next();
+  } else {
+    res.status(403).json({ message: "Forbidden: Admins only" });
+  }
 };

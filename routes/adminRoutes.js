@@ -1,10 +1,21 @@
-import express from 'express';
-import authMiddleware from '../middlewares/authMiddleware.js';
-import { getRegistrations, getEvents, getPhotos } from '../controllers/admin.controller.js';
-const router = express.Router();
+import jwt from "jsonwebtoken";
 
-router.get('/registrations', authMiddleware, getRegistrations);
-router.get('/events', authMiddleware, getEvents);
-router.get('/photos', authMiddleware, getPhotos);
+const adminMiddleware = (req, res, next) => {
+  const token = req.header("Authorization").replace("Bearer ", "");
+  if (!token) {
+    return res.status(401).send({ error: "Access denied. No token provided." });
+  }
 
-export default router;
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (decoded.role !== "admin") {
+      return res.status(403).send({ error: "Access denied. Admins only." });
+    }
+    req.user = decoded;
+    next();
+  } catch (ex) {
+    res.status(400).send({ error: "Invalid token." });
+  }
+};
+
+export default adminMiddleware;
