@@ -1,7 +1,6 @@
 import winston from "winston";
 
 const logger = winston.createLogger({
-  defaultMeta: { service: "user-service" },
   level: "error",
   format: winston.format.combine(
     winston.format.timestamp(),
