@@ -12,4 +12,15 @@ const securityMiddleware = () => {
   });
 };
 
-export { securityMiddleware };
+// Logging Middleware
+const loggingMiddleware = (req, res, next) => {
+  console.log(`Incoming Request: ${req.method} ${req.url}`);
+
+  res.on("finish", () => {
+    console.log(`Outgoing Response: ${res.statusCode}`);
+  });
+
+  next();
+};
+
+export { securityMiddleware, loggingMiddleware };

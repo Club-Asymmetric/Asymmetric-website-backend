@@ -1,11 +1,12 @@
 import express from "express";
+import validation from "../middlewares/validation.js";
 const router = express.Router();
 
 router.post("/", (req, res) => {
   /* Implement logic */
 });
 
-router.post("/event", async (req, res) => {
+router.post("/", validation, async (req, res) => {
   const {
     name,
     currentYear,
@@ -17,22 +18,6 @@ router.post("/event", async (req, res) => {
     teamName,
     memberName,
   } = req.body;
-
-  if (
-    !name ||
-    !currentYear ||
-    !department ||
-    !collegeName ||
-    !email ||
-    !phoneNumber ||
-    !event
-  ) {
-    return res
-      .status(400)
-      .json({
-        message: "All fields are required except team name and member name",
-      });
-  }
 
   try {
     const registration = new Registration({
@@ -53,22 +38,20 @@ router.post("/event", async (req, res) => {
       .json({ message: "Error saving registration", error });
   }
 
-  res
-    .status(201)
-    .json({
-      message: "Registration successful",
-      data: {
-        name,
-        currentYear,
-        department,
-        collegeName,
-        email,
-        phoneNumber,
-        event,
-        teamName,
-        memberName,
-      },
-    });
+  res.status(201).json({
+    message: "Registration successful",
+    data: {
+      name,
+      currentYear,
+      department,
+      collegeName,
+      email,
+      phoneNumber,
+      event,
+      teamName,
+      memberName,
+    },
+  });
 });
 
 export default router;
