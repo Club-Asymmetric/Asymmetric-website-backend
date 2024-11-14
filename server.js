@@ -10,6 +10,9 @@ import { ClientError, ServerError } from "./errors/ApiError.js";
 import { fileURLToPath } from "url";
 import path from "path";
 import database from "./database.js";
+import { securityMiddleware } from "./middlewares/security.js";
+import { rateLimiter } from "./middlewares/rateLimiter.js";
+import { validateRequest } from "./middlewares/requestValidator.js";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -17,6 +20,14 @@ dotenv.config();
 console.log("Created by Vishal and Samuel (KK)");
 
 let app = express();
+
+// securityMiddleware is a function that returns an array of middleware functions
+app.use(securityMiddleware());
+app.use(rateLimiter);
+app.post("/submit", validateRequest, (req, res) => {
+  res.status(200).send("Data received.");
+});
+
 app.use(logging);
 app.use("/admin", adminRoutes);
 app.use("/api/events", eventRoutes);
@@ -36,11 +47,15 @@ app.use((req, res) => {
   throw ClientError.notFound();
 });
 
+app.use((req, res) => {
+  throw ServerError.notImplemented();
+});
+
 // Centralized Error Handler
 app.use(errorHandler);
 
 const server = app.listen(3000, () => {
-  console.log("Server started on port 3000");
+  console.log("server start in http://localhost:3000");
 });
 
 const cleaner = () => {
