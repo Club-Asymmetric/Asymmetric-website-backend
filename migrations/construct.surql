@@ -25,10 +25,10 @@ DEFINE INDEX emails ON registration FIELDS mail UNIQUE;
 DEFINE INDEX numbers ON registration FIELDS number UNIQUE;
 
 DEFINE TABLE podcast SCHEMAFULL;
+DEFINE FIELD name ON podcast TYPE string;
 DEFINE FIELD publish ON podcast TYPE datetime;
 DEFINE FIELD guests ON podcast TYPE array<string>;
 DEFINE FIELD description ON podcast TYPE string;
-DEFINE FIELD audio ON podcast TYPE bytes;
 DEFINE FIELD image ON podcast TYPE record<photo>;
 
 DEFINE TABLE member SCHEMAFULL;

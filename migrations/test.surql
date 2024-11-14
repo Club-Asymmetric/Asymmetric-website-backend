@@ -42,14 +42,6 @@ RETURN [$img1, $img2, $img3, $cat];
     photos: [ $img2, $img2 ],
 }).id)[0];
 
-((CREATE podcast CONTENT {
-    name: "First Podcast",
-    publish: time::now(),
-    guests: ["Alice", "Bob"],
-    description: "Our first podcast",
-    audio: encoding::base64::decode(""),
-    image: $cat,
-}).id)[0];
 
 ((CREATE event CONTENT {
     name: "Noice Workshop",
@@ -57,5 +49,21 @@ RETURN [$img1, $img2, $img3, $cat];
     description: "Just Very Noice..",
     date: time::now() + 1w,
     photos: [ $img3, $cat ],
+}).id)[0];
+
+((CREATE podcast CONTENT {
+    name: "First Podcast",
+    publish: time::now(),
+    guests: ["Alice", "Bob"],
+    description: "Our first podcast",
+    image: $cat,
+}).id)[0];
+
+((CREATE podcast CONTENT {
+    name: "Our Last Podcast",
+    publish: time::now() + 1w,
+    guests: ["Samuel Jabez", "Vishal"],
+    description: "April Fool",
+    image: $img2,
 }).id)[0];
 

@@ -6,10 +6,7 @@ import {
 import { logging } from "../middlewares/logger.js";
 const router = express.Router();
 
-router.use(logging);
-
 router.get("/:id", getPodcastById);
-
 router.get("/", getPodcasts);
 
 export default router;

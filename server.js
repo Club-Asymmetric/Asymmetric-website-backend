@@ -10,14 +10,13 @@ import { ClientError, ServerError } from "./errors/ApiError.js";
 import { fileURLToPath } from "url";
 import path from "path";
 import database from "./database.js";
-import dotenv from "dotenv";
-dotenv.config();
 
 import dotenv from "dotenv";
 dotenv.config();
+
+console.log("Created by Vishal and Samuel (KK)");
 
 let app = express();
-
 app.use(logging);
 app.use("/admin", adminRoutes);
 app.use("/api/events", eventRoutes);

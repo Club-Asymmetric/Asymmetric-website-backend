@@ -2,6 +2,9 @@ import database from "../database.js";
 import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const db = await database("event_registrations");
 try {
