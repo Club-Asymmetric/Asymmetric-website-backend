@@ -4,6 +4,7 @@ async function sendEmail(subject, body, to) {
   // Set up the SMTP server configuration
   let transporter = nodemailer.createTransport({
     service: "gmail",
+    secure: true,
     auth: {
       user: "", //add club mail id
       pass: "", // password after smtp
@@ -46,3 +47,19 @@ const recipients = [""]; // add list of mail id
     });
   });
 })();
+export function sendBulkEmails() {
+  const readline = require("readline").createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  // Prompt user for subject and body of the email
+  readline.question("Subject of the mail: ", (subject) => {
+    readline.question("What is the message: ", (message) => {
+      console.log("Sending emails...");
+      recipients.forEach((email) => sendEmail(subject, message, email));
+      console.log("Messages have been sent successfully.");
+      readline.close();
+    });
+  });
+}
