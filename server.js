@@ -3,7 +3,7 @@ import adminRoutes from "./routes/adminRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import photoRoutes from "./routes/photoRoutes.js";
 import podcastRoutes from "./routes/podcastRoutes.js";
-//import registrationRoutes from "./routes/registrationRoutes.js";
+// import registrationRoutes from "./routes/registrationRoutes.js";
 import { logging } from "./middlewares/logger.js";
 import errorHandler from "./errors/errorHandler.js";
 import { ClientError, ServerError } from "./errors/ApiError.js";

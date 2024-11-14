@@ -14,8 +14,14 @@ const logger = winston.createLogger({
   ],
 });
 
+// Logging Middleware
 const logging = (req, res, next) => {
-  logger.error(`${req.method} ${req.url}`);
+  logger.info(`Incoming Request: ${req.method} ${req.url}`);
+
+  res.on("finish", () => {
+    logger.info(`Outgoing Response: ${res.statusCode}`);
+  });
+
   next();
 };
 
