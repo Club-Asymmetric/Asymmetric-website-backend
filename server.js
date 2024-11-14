@@ -11,6 +11,9 @@ import { fileURLToPath } from "url";
 import path from "path";
 import database from "./database.js";
 
+import dotenv from "dotenv";
+dotenv.config();
+
 let app = express();
 
 app.use(logging);
