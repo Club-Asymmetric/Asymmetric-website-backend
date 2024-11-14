@@ -1,10 +1,9 @@
-import { getEvent, getAllEvents } from '../models/event.js';
+import { getEvent, getAllEvents } from "../models/event.js";
 
 export const getEvents = async (req, res) => {
   try {
     const events = await getAllEvents();
     for (let i in events) {
-      console.log(events[i]);
       for (let j in events[i].photos) {
         events[i].photos[j] = events[i].photos[j].id;
       }

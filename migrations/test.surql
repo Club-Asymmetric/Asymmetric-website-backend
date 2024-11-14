@@ -39,7 +39,7 @@ RETURN [$img1, $img2, $img3];
     publish: time::now(),
     guests: ["Alice", "Bob"],
     description: "Our first podcast",
-    audio: encoding::base64::decode("SAS");
+    audio: encoding::base64::decode(""),
     image: $img2,
 }).id)[0];
 
