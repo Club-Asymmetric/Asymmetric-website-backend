@@ -8,9 +8,13 @@ export default async () => {
     engines: surrealdbNodeEngines(),
   });
   try {
-    await db.connect("surrealkv://asymmetric.db", {
+    await db.connect("http://localhost:8000/rpc", {
       namespace: "asymmetric",
       database: "asymmetric",
+      auth: {
+        username: process.env.SURREAL_USER,
+        password: process.env.SURREAL_PASS,
+      },
     });
   } catch (error) {
     console.error(
