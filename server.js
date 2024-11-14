@@ -1,7 +1,8 @@
 import express from "express";
 import adminRoutes from "./routes/adminRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
-//import podcastRoutes from "./routes/podcastRoutes.js";
+import photoRoutes from "./routes/photoRoutes.js";
+import podcastRoutes from "./routes/podcastRoutes.js";
 //import registrationRoutes from "./routes/registrationRoutes.js";
 import { logging } from "./middlewares/logger.js";
 import errorHandler from "./errors/errorHandler.js";
@@ -15,8 +16,11 @@ let app = express();
 app.use(logging);
 app.use("/admin", adminRoutes);
 app.use("/api/events", eventRoutes);
-//app.use("/api/podcasts", podcastRoutes);
+app.use("/api/podcasts", podcastRoutes);
 //app.use("/api/registrations", registrationRoutes);
+
+// TODO: @cosmic-striker Increase Security
+app.use("/if/you/get/these/images/you/are/gay", photoRoutes);
 
 app.get("/", (req, res) =>
   res.sendFile("index.html", {
@@ -24,8 +28,8 @@ app.get("/", (req, res) =>
   })
 );
 
-app.use((req, res, next) => {
-  next(new NotFoundError());
+app.use((req, res) => {
+  throw ClientError.notFound();
 });
 
 // Centralized Error Handler
@@ -36,8 +40,8 @@ const server = app.listen(3000, () => {
 });
 
 const cleaner = () => {
-  server.close(() => {
-    database().close;
+  server.close(async () => {
+    (await database()).close();
   });
 };
 
