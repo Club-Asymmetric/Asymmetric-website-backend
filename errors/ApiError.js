@@ -72,6 +72,10 @@ class ServerError extends ApiError {
     return new ServerError(502, message);
   }
 
+  static serviceUnavailable(message = "Service Unavailable") {
+    return new ServerError(503, message);
+  }
+
   static httpVersionNotSupported(message = "HTTP Version Not Supported") {
     return new ServerError(505, message);
   }
