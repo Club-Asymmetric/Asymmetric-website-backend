@@ -21,14 +21,16 @@ console.log("Created by Vishal and Samuel (KK)");
 
 let app = express();
 
+app.use(logging);
 // securityMiddleware is a function that returns an array of middleware functions
 app.use(securityMiddleware());
 app.use(rateLimiter);
+
+app.use("/static", express.static("static"));
+
 app.post("/submit", validateRequest, (req, res) => {
   res.status(200).send("Data received.");
 });
-
-app.use(logging);
 app.use("/admin", adminRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);

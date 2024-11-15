@@ -2,29 +2,12 @@
 <html lang="en">
   <head>
     <title>Asymmetric Testing</title>
+    <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
-    <script>
-      (async () => {
-        const response = await fetch("/api/podcasts");
-        if (response.ok) {
-          const obj = await response.json();
-          for (let podcast of obj) {
-            let h1 = document.createElement("h1");
-            h1.innerText = podcast.name;
-            document.body.appendChild(h1);
-            let p = document.createElement("p");
-            p.innerText = podcast.description;
-            document.body.appendChild(p);
-            let img = document.createElement("img");
-            img.src = `/if/you/get/these/images/you/are/gay/${podcast.image}`;
-            document.body.appendChild(img);
-            p = document.createElement("p");
-            p.innerText = `Publish: ${podcast.publish}\tGuest: ${podcast.guests}`;
-            document.body.appendChild(p);
-          }
-        } else alert("You fked up.! Try Again >:(");
-      })();
-    </script>
+    <button id="events">Events</button>
+    <button id="podcasts">Podcasts</button>
+    <div id="main"></div>
+    <script src="/static/script.js"></script>
   </body>
 </html>

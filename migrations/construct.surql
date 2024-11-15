@@ -30,7 +30,8 @@ DEFINE FIELD publish ON podcast TYPE datetime;
 DEFINE FIELD guests ON podcast TYPE array<string>;
 DEFINE FIELD description ON podcast TYPE string;
 DEFINE FIELD image ON podcast TYPE record<photo>;
-DEFINE FIELD audio ON podcast TYPE string;
+DEFINE FIELD audio ON podcast TYPE string
+    ASSERT $value IN ["aac", "midi", "mpeg", "ogg", "opus", "wav", "webm"];
 
 DEFINE TABLE member SCHEMAFULL;
 DEFINE FIELD role ON member TYPE string;

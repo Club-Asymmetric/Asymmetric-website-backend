@@ -11,7 +11,6 @@ dotenv.config();
 
 const db = await database("event_registrations");
 try {
-  let promises = [];
   let pathStructure = {};
   async function recursiveRead(dir, cur = pathStructure) {
     const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -38,7 +37,57 @@ try {
     path.join(path.dirname(fileURLToPath(import.meta.url)), "../photos")
   );
   console.log(pathStructure);
-  await Promise.all(promises);
+  await db.create("event", {
+    name: "Buggy's Live Stream",
+    participants: 1000,
+    date: new Date(),
+    photos: Object.entries(pathStructure["events"]["marineford"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "Yonko Buggy's Livestream @ Marineford",
+  });
+  await db.create("event", {
+    name: "Shinokuni's Auction",
+    participants: 250,
+    date: new Date(),
+    photos: Object.entries(pathStructure["events"]["punkhazard"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "Caesar Clown's Destructive Weapon Showcase @ Punkhazard",
+  });
+  await db.create("event", {
+    name: "Sogeking's Secret Diaries",
+    participants: 8000,
+    date: new Date(),
+    photos: Object.entries(pathStructure["events"]["enieslobby"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "Sniper King Sogeking's Adventures @ Enies Lobby",
+  });
+  await db.create("podcast", {
+    name: "Roger's Podcast",
+    publish: new Date(),
+    guests: ["Roger"],
+    description: "Roger, the King of the Pirates",
+    image: new RecordId("photo", pathStructure["podcasts"]["roger.webp"]),
+    audio: "mpeg",
+  });
+  await db.create("podcast", {
+    name: "Buggy's Podcast",
+    publish: new Date(),
+    guests: ["Buggy"],
+    description: "Buggy, the Leader of the Cross Guild",
+    image: new RecordId("photo", pathStructure["podcasts"]["buggy.webp"]),
+    audio: "mpeg",
+  });
+  await db.create("podcast", {
+    name: "Spandem's Podcast",
+    publish: new Date(),
+    guests: ["Spandam"],
+    description: "Spandam, the Leader of CP9",
+    image: new RecordId("photo", pathStructure["podcasts"]["spandam.webp"]),
+    audio: "mpeg",
+  });
 } catch (error) {
   console.error(
     "failed to migrate to surrealdb",
