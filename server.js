@@ -9,7 +9,6 @@ import errorHandler from "./errors/errorHandler.js";
 import { ClientError, ServerError } from "./errors/ApiError.js";
 import { fileURLToPath } from "url";
 import path from "path";
-import database from "./database.js";
 import { securityMiddleware } from "./middlewares/security.js";
 import { rateLimiter } from "./middlewares/rateLimiter.js";
 import { validateRequest } from "./middlewares/requestValidator.js";
@@ -37,7 +36,6 @@ app.use("/api/registrations", registrationRoutes);
 
 app.use("/credits", renderCredits);
 
-// TODO: @cosmic-striker Increase Security
 app.use("/if/you/get/these/images/you/are/gay", photoRoutes);
 
 app.get("/", (req, res) =>
@@ -45,6 +43,17 @@ app.get("/", (req, res) =>
     root: path.dirname(fileURLToPath(import.meta.url)),
   })
 );
+
+import database from "./database.js";
+app.use("/photos", async (req, res) => {
+  let output = "";
+  for (let record of (
+    await (await database()).query("SELECT record::id(id) AS id FROM photo")
+  )[0]) {
+    output += `<img src="/if/you/get/these/images/you/are/gay/${record.id}">`;
+  }
+  res.send(output);
+});
 
 app.use((req, res) => {
   throw ClientError.notFound();
