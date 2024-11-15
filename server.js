@@ -3,7 +3,7 @@ import adminRoutes from "./routes/adminRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import photoRoutes from "./routes/photoRoutes.js";
 import podcastRoutes from "./routes/podcastRoutes.js";
-// import registrationRoutes from "./routes/registrationRoutes.js";
+import registrationRoutes from "./routes/registrationRoutes.js";
 import { logging } from "./middlewares/logger.js";
 import errorHandler from "./errors/errorHandler.js";
 import { ClientError, ServerError } from "./errors/ApiError.js";
@@ -13,6 +13,7 @@ import database from "./database.js";
 import { securityMiddleware } from "./middlewares/security.js";
 import { rateLimiter } from "./middlewares/rateLimiter.js";
 import { validateRequest } from "./middlewares/requestValidator.js";
+import { renderCredits } from "./credits.js";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -32,7 +33,9 @@ app.use(logging);
 app.use("/admin", adminRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);
-//app.use("/api/registrations", registrationRoutes);
+app.use("/api/registrations", registrationRoutes);
+
+app.use("/credits", renderCredits);
 
 // TODO: @cosmic-striker Increase Security
 app.use("/if/you/get/these/images/you/are/gay", photoRoutes);
