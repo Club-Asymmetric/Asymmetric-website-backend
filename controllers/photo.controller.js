@@ -1,5 +1,3 @@
-import { RecordId } from "surrealdb";
-import database from "../database.js";
 import { ClientError } from "../errors/ApiError.js";
 import { getPhoto } from "../models/photo.js";
 

@@ -1,11 +1,13 @@
+import { ServerError } from "../errors/ApiError.js";
+
 export const getRegistrations = async (req, res) => {
-  /* Implement logic */
+  throw ServerError.notImplemented();
 };
 
 export const getEvents = async (req, res) => {
-  /* Implement logic */
+  throw ServerError.notImplemented();
 };
 
 export const getPhotos = async (req, res) => {
-  /* Implement logic */
+  throw ServerError.notImplemented();
 };
