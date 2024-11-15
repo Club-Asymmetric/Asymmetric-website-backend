@@ -1,7 +1,7 @@
 DEFINE TABLE photo SCHEMAFULL;
 DEFINE FIELD binary ON photo TYPE bytes;
 DEFINE FIELD mime ON photo TYPE string
- ASSERT $value IN ["apng", "avif", "gif", "jpeg", "png", "svg+xml", "webp"];
+    ASSERT $value IN ["apng", "avif", "gif", "jpeg", "png", "svg+xml", "webp"];
 
 DEFINE TABLE event SCHEMAFULL;
 DEFINE FIELD name ON event TYPE string;
@@ -30,6 +30,7 @@ DEFINE FIELD publish ON podcast TYPE datetime;
 DEFINE FIELD guests ON podcast TYPE array<string>;
 DEFINE FIELD description ON podcast TYPE string;
 DEFINE FIELD image ON podcast TYPE record<photo>;
+DEFINE FIELD audio ON podcast TYPE string;
 
 DEFINE TABLE member SCHEMAFULL;
 DEFINE FIELD role ON member TYPE string;
