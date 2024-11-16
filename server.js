@@ -37,7 +37,7 @@ app.get("/api/credits", (req, res) => {
   });
 });
 
-app.use("/if/you/get/these/images/you/are/gay", photoRoutes);
+app.use("/images/are/not/here", photoRoutes);
 
 app.get("/", (req, res) =>
   res.sendFile("index.html", {

@@ -18,9 +18,11 @@ export async function getPodcast(id) {
 }
 
 export async function getAllPodcasts() {
-  return await (
-    await database()
-  ).query("SELECT *, image.id(), id.id() OMIT mime FROM podcast");
+  return (
+    await (
+      await database()
+    ).query("SELECT *, image.id(), id.id() OMIT mime FROM podcast")
+  )[0];
 }
 
 export async function getPodcastAudio(id) {

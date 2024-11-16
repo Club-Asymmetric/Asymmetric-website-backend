@@ -1,5 +1,7 @@
 # API documentation
+
 ## `GET /api/events` Response:
+
 ```js
 [
   {
@@ -19,7 +21,9 @@
   },...
 ]
 ```
+
 ## `GET /api/events/string(20)`
+
 ```js
 {
   date: "yyyy-mm-ddT00:00:00.000Z",
@@ -37,8 +41,11 @@
   ],
 }
 ```
-## `GET /if/you/get/these/images/you/are/gay/string(20)` -> image
+
+## `GET /images/are/not/here/string(20)` -> image
+
 ## `GET /api/podcasts`
+
 ```js
 [
   {
@@ -51,7 +58,9 @@
   },...
 ]
 ```
+
 ## `GET /api/podcasts/string(20)`
+
 ```js
 {
   description: string,
@@ -62,4 +71,5 @@
   publish: "yyyy-mm-ddT00:00:00.000Z",
 }
 ```
+
 ## `GET /api/podcast/string(20)/stream` -> audio
