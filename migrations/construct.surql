@@ -14,11 +14,10 @@ DEFINE TABLE event SCHEMAFULL;
 DEFINE FIELD name ON event TYPE string;
 DEFINE FIELD participants ON event TYPE int;
 DEFINE FIELD date ON event TYPE datetime VALUE $value.group('day');
-DEFINE FIELD registration_dates ON event TYPE array<datetime, 2>
-    VALUE $value[*].group('day')
-    ASSERT $value.len() == 2;
-DEFINE FIELD team_size ON event TYPE array<int, 2>
-    ASSERT $value.len() == 2 AND $value[*] > 0;
+DEFINE FIELD registration_start ON event TYPE datetime VALUE $value.group('day');
+DEFINE FIELD registration_end ON event TYPE datetime VALUE $value.group('day');
+DEFINE FIELD min_team_size ON event TYPE int ASSERT $value > 0;
+DEFINE FIELD max_team_size ON event TYPE int ASSERT $value > 0;
 DEFINE FIELD photos ON event TYPE array<record<photo>>;
 DEFINE FIELD description ON event TYPE string;
 

@@ -8,16 +8,12 @@
     date: "yyyy-mm-ddT00:00:00.000Z",
     description: string,
     id: string(20),
+    max_team_size: int,
+    min_team_size: int,
     name: string,
     photos: [ string(20)... ],
-    registration_dates: [
-      "yyyy-mm-ddT00:00:00.000Z",
-      "yyyy-mm-ddT00:00:00.000Z",
-    ],
-    team_size: [
-      int,
-      int,
-    ],
+    registration_end: "yyyy-mm-ddT00:00:00.000Z",
+    registration_start: "yyyy-mm-ddT00:00:00.000Z",
   },...
 ]
 ```
