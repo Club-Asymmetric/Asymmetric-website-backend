@@ -4,7 +4,6 @@ import {
   getPodcastById,
   getPodcastAudioById,
 } from "../controllers/podcast.controller.js";
-import { logging } from "../middlewares/logger.js";
 const router = express.Router();
 
 router.get("/:id/stream", getPodcastAudioById);

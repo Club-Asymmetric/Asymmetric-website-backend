@@ -12,13 +12,12 @@ DEFINE FIELD description ON event TYPE string;
 
 DEFINE TABLE registration SCHEMAFULL;
 DEFINE FIELD name ON registration TYPE string;
-DEFINE FIELD team ON registration TYPE string;
+DEFINE FIELD team ON registration TYPE option<string>;
 DEFINE FIELD members ON registration TYPE array<string, 3>;
 DEFINE FIELD year ON registration TYPE datetime VALUE time::group($value, "year");
-DEFINE FIELD event_date ON registration TYPE datetime VALUE time::group($value, "day");
 DEFINE FIELD department ON registration TYPE string;
 DEFINE FIELD college ON registration TYPE string;
-DEFINE FIELD mail ON registration TYPE string ASSERT string::is::email($value);
+DEFINE FIELD email ON registration TYPE string ASSERT string::is::email($value);
 DEFINE FIELD number ON registration TYPE number;
 DEFINE FIELD event ON registration TYPE record<event>;
 DEFINE INDEX emails ON registration FIELDS mail UNIQUE;
