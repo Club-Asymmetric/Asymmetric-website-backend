@@ -12,8 +12,6 @@ import path from "path";
 import { securityMiddleware } from "./middlewares/security.js";
 import { rateLimiter } from "./middlewares/rateLimiter.js";
 
-import { creditsList } from "./credits.js";
-
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -33,8 +31,10 @@ app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);
 app.use("/api/registrations", registrationRoutes);
 
-app.get("/api/credits", (res) => {
-  res.json(creditsList);
+app.get("/api/credits", (req, res) => {
+  res.sendFile("credits.json", {
+    root: path.dirname(fileURLToPath(import.meta.url)),
+  });
 });
 
 app.use("/if/you/get/these/images/you/are/gay", photoRoutes);
