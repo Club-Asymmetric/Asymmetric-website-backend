@@ -3,7 +3,6 @@ import adminRoutes from "./routes/adminRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import photoRoutes from "./routes/photoRoutes.js";
 import podcastRoutes from "./routes/podcastRoutes.js";
-import registrationRoutes from "./routes/registrationRoutes.js";
 import { logging } from "./middlewares/logger.js";
 import errorHandler from "./errors/errorHandler.js";
 import { ClientError, ServerError } from "./errors/ApiError.js";
@@ -23,13 +22,13 @@ app.use(logging);
 // securityMiddleware is a function that returns an array of middleware functions
 app.use(securityMiddleware());
 app.use(rateLimiter);
+app.use(express.json());
 
 app.use("/static", express.static("static"));
 
 app.use("/admin", adminRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);
-app.use("/api/registrations", registrationRoutes);
 
 app.get("/api/credits", (req, res) => {
   res.sendFile("credits.json", {
