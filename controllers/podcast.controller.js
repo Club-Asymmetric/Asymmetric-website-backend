@@ -22,9 +22,10 @@ export const getPodcasts = async (req, res, next) => {
 
 export const getPodcastAudioById = async (req, res, next) => {
   try {
-    const { stream, audio, size } = await getPodcastAudio(req.params.id);
+    const { stream, mime, size } = await getPodcastAudio(req.params.id);
+    console.log(mime);
     res.writeHead(200, {
-      "Content-Type": `audio/${audio}`,
+      "Content-Type": `audio/${mime}`,
       "Content-Length": size,
     });
     stream.pipe(res);
