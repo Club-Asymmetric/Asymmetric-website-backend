@@ -1,7 +1,11 @@
 import { getEvent, getAllEvents } from "../models/event.js";
 
-export const getEvents = async (req, res) => {
-  res.json(await getAllEvents());
+export const getEvents = async (req, res, next) => {
+  try {
+    res.json(await getAllEvents());
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const getEventById = async (req, res, next) => {
