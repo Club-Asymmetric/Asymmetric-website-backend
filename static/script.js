@@ -11,7 +11,7 @@ function loadPodcast(id) {
         <p>Guests: ${guests.join(", ")}</p>
         <p>Publish: ${publish}</p>
         <p>${description}</p>
-        <img src="/if/you/get/these/images/you/are/gay/${image}">
+        <img src="/images/are/not/here/${image}">
         <audio controls>
           <source src="/api/podcasts/${id}/stream" type="audio/${mime}">
           No Audio for you >:(
