@@ -27,7 +27,7 @@ DEFINE FIELD name ON registration TYPE string;
 DEFINE FIELD team ON registration TYPE option<string>;
 DEFINE FIELD members ON registration TYPE array<string>
     ASSERT $value.len() >= $this.event.team_size[0] AND $value.len() <= $this.event.team_size[1];
-DEFINE FIELD year ON registration TYPE datetime VALUE $value.group('year');
+DEFINE FIELD year ON registration TYPE int ASSERT $value>0;
 DEFINE FIELD department ON registration TYPE string;
 DEFINE FIELD college ON registration TYPE string;
 DEFINE FIELD email ON registration TYPE string ASSERT $value.is_email();
