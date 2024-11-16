@@ -11,7 +11,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 import { securityMiddleware } from "./middlewares/security.js";
 import { rateLimiter } from "./middlewares/rateLimiter.js";
-import { validateForm } from "./middlewares/validation.js";
+
 import { creditsList } from "./credits.js";
 
 import dotenv from "dotenv";
@@ -28,9 +28,6 @@ app.use(rateLimiter);
 
 app.use("/static", express.static("static"));
 
-app.post("/submit", validateForm, (req, res) => {
-  res.status(200).send("Data received.");
-});
 app.use("/admin", adminRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);

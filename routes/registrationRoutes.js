@@ -1,8 +1,8 @@
 import express from "express";
-import validation from "../middlewares/validation.js";
+import { validateForm } from "../middlewares/validation.js";
 const router = express.Router();
 
-router.post("/", validation, async (req, res) => {
+router.post("/", validateForm, async (req, res) => {
   const {
     name,
     year,

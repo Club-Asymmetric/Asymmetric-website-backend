@@ -3,14 +3,16 @@ import { RecordId } from "surrealdb";
 import { ClientError } from "../errors/ApiError.js";
 
 export async function getAllEvents() {
-  return (await database()).query("SELECT *, photos[*].id() FROM event");
+  return (await database()).query(
+    "SELECT *, photos[*].id(), id.id() FROM event"
+  );
 }
 
 export async function getEvent(id) {
   const out = (
     await (
       await database()
-    ).query("(SELECT *, photos[*].id() FROM $event)[0]", {
+    ).query("(SELECT *, photos[*].id(), id.id() FROM $event)[0]", {
       event: new RecordId("event", id),
     })
   )[0];
