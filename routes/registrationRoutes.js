@@ -1,32 +1,31 @@
 import express from "express";
 import validation from "../middlewares/validation.js";
-import { ServerError } from "../errors/ApiError.js";
 const router = express.Router();
 
 router.post("/", validation, async (req, res) => {
   const {
     name,
-    currentYear,
+    year,
     department,
-    collegeName,
+    college,
     email,
-    phoneNumber,
+    number,
     event,
-    teamName,
-    memberName,
+    team,
+    members,
   } = req.body;
 
   try {
     const registration = new Registration({
       name,
-      currentYear,
+      year,
       department,
-      collegeName,
-      email,
-      phoneNumber,
+      college,
+      mail,
+      number,
       event,
-      teamName,
-      memberName,
+      team,
+      members,
     });
     await registration.save();
   } catch (error) {
