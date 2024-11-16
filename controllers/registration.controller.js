@@ -8,12 +8,20 @@ export const eventRegistration = async (req, res) => {
     phoneNumber,
     event,
     teamName,
-    memberName
+    memberName,
   } = req.body;
 
-  if (!name || !currentYear || !department || !collegeName || !email || !phoneNumber || !event) {
+  if (
+    !name ||
+    !currentYear ||
+    !department ||
+    !collegeName ||
+    !email ||
+    !phoneNumber ||
+    !event
+  ) {
     return res.status(400).json({
-      message: 'All fields are required except team name and member name'
+      message: "All fields are required except team name and member name",
     });
   }
 
@@ -27,15 +35,17 @@ export const eventRegistration = async (req, res) => {
       phoneNumber,
       event,
       teamName,
-      memberName
+      memberName,
     });
     await registration.save();
   } catch (error) {
-    return res.status(500).json({ message: 'Error saving registration', error });
+    return res
+      .status(500)
+      .json({ message: "Error saving registration", error });
   }
 
   res.status(201).json({
-    message: 'Registration successful',
+    message: "Registration successful",
     data: {
       name,
       currentYear,
@@ -45,8 +55,8 @@ export const eventRegistration = async (req, res) => {
       phoneNumber,
       event,
       teamName,
-      memberName
-    }
+      memberName,
+    },
   });
 };
 

@@ -1,10 +1,7 @@
 import express from "express";
 import validation from "../middlewares/validation.js";
+import { ServerError } from "../errors/ApiError.js";
 const router = express.Router();
-
-router.post("/", (req, res) => {
-  /* Implement logic */
-});
 
 router.post("/", validation, async (req, res) => {
   const {
