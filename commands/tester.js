@@ -4,8 +4,7 @@ import path from "path";
 import fs from "fs/promises";
 import mime from "mime-types";
 import dotenv from "dotenv";
-import { publicDecrypt } from "crypto";
-import { RecordId } from "surrealdb";
+import { Duration, RecordId } from "surrealdb";
 
 dotenv.config();
 
@@ -40,16 +39,26 @@ try {
   await db.create("event", {
     name: "Buggy's Live Stream",
     participants: 1000,
-    date: new Date(),
+    date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
     photos: Object.entries(pathStructure["events"]["marineford"]).map(
       ([_, v]) => new RecordId("photo", v)
     ),
+    registration_dates: [
+      new Date(),
+      new Date(Date.now() + 24 * 60 * 60 * 1000),
+    ],
+    team_size: [1, 2],
     description: "Yonko Buggy's Livestream @ Marineford",
   });
   await db.create("event", {
     name: "Shinokuni's Auction",
     participants: 250,
-    date: new Date(),
+    date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+    registration_dates: [
+      new Date(),
+      new Date(Date.now() + 24 * 60 * 60 * 1000),
+    ],
+    team_size: [1, 2],
     photos: Object.entries(pathStructure["events"]["punkhazard"]).map(
       ([_, v]) => new RecordId("photo", v)
     ),
@@ -58,7 +67,12 @@ try {
   await db.create("event", {
     name: "Sogeking's Secret Diaries",
     participants: 8000,
-    date: new Date(),
+    date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+    registration_dates: [
+      new Date(),
+      new Date(Date.now() + 24 * 60 * 60 * 1000),
+    ],
+    team_size: [1, 2],
     photos: Object.entries(pathStructure["events"]["enieslobby"]).map(
       ([_, v]) => new RecordId("photo", v)
     ),
@@ -70,7 +84,7 @@ try {
     guests: ["Roger"],
     description: "Roger, the King of the Pirates",
     image: new RecordId("photo", pathStructure["podcasts"]["roger.webp"]),
-    audio: "mpeg",
+    mime: "mpeg",
   });
   await db.create("podcast", {
     name: "Buggy's Podcast",
@@ -78,7 +92,7 @@ try {
     guests: ["Buggy"],
     description: "Buggy, the Leader of the Cross Guild",
     image: new RecordId("photo", pathStructure["podcasts"]["buggy.webp"]),
-    audio: "mpeg",
+    mime: "mpeg",
   });
   await db.create("podcast", {
     name: "Spandem's Podcast",
@@ -86,7 +100,7 @@ try {
     guests: ["Spandam"],
     description: "Spandam, the Leader of CP9",
     image: new RecordId("photo", pathStructure["podcasts"]["spandam.webp"]),
-    audio: "mpeg",
+    mime: "mpeg",
   });
 } catch (error) {
   console.error(
