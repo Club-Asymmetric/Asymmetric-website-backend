@@ -12,7 +12,7 @@ import path from "path";
 import { securityMiddleware } from "./middlewares/security.js";
 import { rateLimiter } from "./middlewares/rateLimiter.js";
 import { validateForm } from "./middlewares/validation.js";
-import { renderCredits } from "./credits.js";
+import { creditsList } from "./credits.js";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -36,7 +36,9 @@ app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);
 app.use("/api/registrations", registrationRoutes);
 
-app.use("/credits", renderCredits);
+app.get("/api/credits", (res) => {
+  res.json(creditsList);
+});
 
 app.use("/if/you/get/these/images/you/are/gay", photoRoutes);
 
