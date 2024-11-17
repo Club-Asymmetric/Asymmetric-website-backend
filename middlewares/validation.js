@@ -1,4 +1,7 @@
 import { body, checkSchema, validationResult } from "express-validator";
+import jwt from "jsonwebtoken";
+import crypto from "crypto";
+import { ClientError } from "../errors/ApiError.js";
 
 export const validateForm = [
   checkSchema({
@@ -46,6 +49,34 @@ export const validateForm = [
       },
     },
   }),
+  body("captcha")
+    .trim()
+    .notEmpty()
+    .withMessage("Captcha is required")
+    .custom((value, { req }) => {
+      const token = req.cookies.token;
+      if (!token) {
+        throw ClientError.gone();
+      }
+      const { hash, identifier, issuedAt } = jwt.verify(
+        token,
+        process.env.JWT_SECRET
+      );
+      const now = Date.now();
+      if (now - issuedAt < 20000) {
+        throw ClientError.requestTimeout("Please Wait");
+      }
+      const [number, email] = identifier.split(",");
+      if (number != req.body.number || email != req.body.email) {
+        throw ClientError.unauthorized("Invalid Captcha");
+      }
+      if (hash === crypto.createHash("sha256").update(value).digest("hex")) {
+        return true;
+      } else {
+        throw ClientError.unauthorized("Invalid Captcha");
+      }
+    }),
+
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
