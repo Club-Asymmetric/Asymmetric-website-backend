@@ -3,6 +3,7 @@ import adminRoutes from "./routes/adminRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import photoRoutes from "./routes/photoRoutes.js";
 import podcastRoutes from "./routes/podcastRoutes.js";
+import { getCaptcha } from "./controllers/captcha.controller.js";
 import { logging } from "./middlewares/logger.js";
 import errorHandler from "./errors/errorHandler.js";
 import { ClientError, ServerError } from "./errors/ApiError.js";
@@ -10,6 +11,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 import { securityMiddleware } from "./middlewares/security.js";
 import { rateLimiter } from "./middlewares/rateLimiter.js";
+import cookieParser from "cookie-parser";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -19,16 +21,16 @@ console.log("Created by Vishal and Samuel (KK)");
 let app = express();
 
 app.use(logging);
-// securityMiddleware is a function that returns an array of middleware functions
 app.use(securityMiddleware());
 app.use(rateLimiter);
 app.use(express.json());
-
+app.use(cookieParser());
 app.use("/static", express.static("static"));
 
 app.use("/admin", adminRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);
+app.get("/api/captcha", getCaptcha);
 
 app.get("/api/credits", (req, res) => {
   res.sendFile("credits.json", {
