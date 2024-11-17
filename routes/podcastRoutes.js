@@ -6,8 +6,8 @@ import {
 } from "../controllers/podcast.controller.js";
 const router = express.Router();
 
-router.get("/:id/stream", getPodcastAudioById);
-router.get("/:id", getPodcastById);
 router.get("/", getPodcasts);
+router.get("/:id", getPodcastById);
+router.get("/:id/stream", getPodcastAudioById);
 
 export default router;

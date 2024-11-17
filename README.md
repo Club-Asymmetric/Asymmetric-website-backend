@@ -63,6 +63,7 @@
   guests: [ string... ],
   id: string(20),
   image: string(20),
+  mime: string,
   name: string,
   publish: "yyyy-mm-ddT00:00:00.000Z",
 }
