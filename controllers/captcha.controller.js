@@ -1,17 +1,9 @@
-export const getCaptcha = (req, res) => {};
-
-import express from "express";
-import bodyParser from "body-parser";
-
-const app = express();
-app.use(bodyParser.json());
-app.use(express.static("public")); // Serve static files for the frontend
-
-let captchaText = "";
-let captchaTimeout = null;
+import jwt from "jsonwebtoken";
+import { ClientError } from "../errors/ApiError.js";
+import crypto from "crypto";
 
 // Function to generate a random case-sensitive and order-sensitive captcha
-function generateCaptcha(length = 10) {
+function generateCaptcha(length = 8) {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
@@ -21,26 +13,39 @@ function generateCaptcha(length = 10) {
   return result;
 }
 
-app.get("/captcha", (req, res) => {
-  if (captchaTimeout) clearTimeout(captchaTimeout); // Clear previous timeout
-  captchaText = generateCaptcha();
-  res.json({ captcha: captchaText });
-});
-
-app.post("/validate-captcha", (req, res) => {
-  const { userInput } = req.body;
-  console.log("userInput");
-  if (userInput == captchaText) {
-    captchaText = ""; // Reset captcha after validation
-    clearTimeout(captchaTimeout);
-    res.json({ success: true, message: "Captcha validated successfully!" });
-  } else {
-    res.json({ success: false, message: "Invalid captcha. Please try again." });
+export const verifyCaptcha = (req, res, next) => {
+  const { result } = req.body;
+  const token = req.cookies.captchaToken;
+  if (!token) {
+    return next(ClientError.gone());
   }
-});
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(decoded);
+    const now = Date.now();
+    if (now - decoded.issuedAt < 20000) {
+      throw ClientError.requestTimeout("Please Wait");
+    }
+    if (
+      decoded.hash === crypto.createHash("sha256").update(result).digest("hex")
+    ) {
+      return res.json({ success: true });
+    } else {
+      throw ClientError.unauthorized("Invalid Captcha");
+    }
+  } catch (err) {
+    next(err);
+  }
+};
 
-// Start the server
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+export const getCaptcha = (req, res) => {
+  const captcha = generateCaptcha();
+  const issuedAt = Date.now();
+  const result = captcha.split("").reverse().join("");
+  const hash = crypto.createHash("sha256").update(result).digest("hex");
+  const token = jwt.sign({ hash, issuedAt }, process.env.JWT_SECRET, {
+    expiresIn: "5m",
+  });
+  res.cookie("captchaToken", token, { httpOnly: true, secure: false });
+  res.json({ captcha });
+};
