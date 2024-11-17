@@ -11,6 +11,8 @@ import {
 import { validateForm } from "../middlewares/validation.js";
 import cookieParser from "cookie-parser";
 
+router.get("/:id", getEventById);
+router.get("/", getEvents);
 router.post(
   "/:id/register",
   rateLimiter,
@@ -19,7 +21,5 @@ router.post(
   validateForm,
   eventRegistration
 );
-router.get("/:id", getEventById);
-router.get("/", getEvents);
 
 export default router;

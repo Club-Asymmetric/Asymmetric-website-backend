@@ -14,17 +14,23 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 dotenv.config();
 
-console.log("Created by Vishal and Samuel (KK)");
+console.log("Created by Vishal and Samuel Jabez");
 
 let app = express();
 
 app.use(logging);
-// app.use(securityMiddleware());
+app.use(securityMiddleware());
 app.use("/static", express.static("static"));
 app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);
-app.get("/api/captcha", express.json(), cookieParser(), getCaptcha);
-// app.post("/api/captcha", cookieParser(), verifyCaptcha);
+app.post("/api/captcha", express.json(), cookieParser(), getCaptcha);
+
+app.use("/static", express.static("static"));
+app.get("/", (req, res) =>
+  res.sendFile("index.html", {
+    root: path.join(path.dirname(fileURLToPath(import.meta.url))),
+  })
+);
 
 app.get("/api/credits", (req, res) => {
   res.sendFile("credits.json", {
