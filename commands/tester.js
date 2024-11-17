@@ -43,22 +43,20 @@ try {
     photos: Object.entries(pathStructure["events"]["marineford"]).map(
       ([_, v]) => new RecordId("photo", v)
     ),
-    registration_dates: [
-      new Date(),
-      new Date(Date.now() + 24 * 60 * 60 * 1000),
-    ],
-    team_size: [1, 2],
+    registration_start: new Date(),
+    registration_end: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    min_team_size: 1,
+    max_team_size: 2,
     description: "Yonko Buggy's Livestream @ Marineford",
   });
   await db.create("event", {
     name: "Shinokuni's Auction",
     participants: 250,
     date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-    registration_dates: [
-      new Date(),
-      new Date(Date.now() + 24 * 60 * 60 * 1000),
-    ],
-    team_size: [1, 2],
+    registration_start: new Date(),
+    registration_end: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    min_team_size: 1,
+    max_team_size: 2,
     photos: Object.entries(pathStructure["events"]["punkhazard"]).map(
       ([_, v]) => new RecordId("photo", v)
     ),
@@ -68,11 +66,10 @@ try {
     name: "Sogeking's Secret Diaries",
     participants: 8000,
     date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
-    registration_dates: [
-      new Date(),
-      new Date(Date.now() + 24 * 60 * 60 * 1000),
-    ],
-    team_size: [1, 2],
+    registration_start: new Date(),
+    registration_end: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    min_team_size: 1,
+    max_team_size: 2,
     photos: Object.entries(pathStructure["events"]["enieslobby"]).map(
       ([_, v]) => new RecordId("photo", v)
     ),
