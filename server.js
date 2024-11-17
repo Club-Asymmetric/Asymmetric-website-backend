@@ -19,7 +19,7 @@ console.log("Created by Vishal and Samuel (KK)");
 let app = express();
 
 app.use(logging);
-app.use(securityMiddleware());
+// app.use(securityMiddleware());
 app.use("/static", express.static("static"));
 app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);
