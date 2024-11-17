@@ -9,8 +9,8 @@ import {
 
 import { validateForm } from "../middlewares/validation.js";
 
+router.post("/:id/register", validateForm, eventRegistration);
 router.get("/:id", getEventById);
 router.get("/", getEvents);
-router.post("/:id/register", validateForm, eventRegistration);
 
 export default router;

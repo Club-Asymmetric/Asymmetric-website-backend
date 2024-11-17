@@ -17,27 +17,10 @@ export const getEventById = async (req, res, next) => {
 };
 
 export const eventRegistration = async (req, res) => {
-  const {
-    name,
-    currentYear,
-    department,
-    collegeName,
-    email,
-    phoneNumber,
-    event,
-    teamName,
-    memberName,
-  } = req.body;
+  const { name, year, department, college, email, number, team, members } =
+    req.body;
 
-  if (
-    !name ||
-    !currentYear ||
-    !department ||
-    !collegeName ||
-    !email ||
-    !phoneNumber ||
-    !event
-  ) {
+  if (!name || !year || !department || !college || !email || !number) {
     return res.status(400).json({
       message: "All fields are required except team name and member name",
     });
@@ -76,4 +59,5 @@ export const eventRegistration = async (req, res) => {
       memberName,
     },
   });
+  res.send("Success");
 };
