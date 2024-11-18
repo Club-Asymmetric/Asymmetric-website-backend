@@ -1,7 +1,8 @@
 import express from "express";
-import eventRoutes from "./routes/eventRoutes.js";
-import photoRoutes from "./routes/photoRoutes.js";
-import podcastRoutes from "./routes/podcastRoutes.js";
+import eventRoutes from "./routes/event.routes.js";
+import photoRoutes from "./routes/photo.routes.js";
+import podcastRoutes from "./routes/podcast.routes.js";
+import memberRoutes from "./routes/member.routes.js";
 import { getCaptcha } from "./controllers/captcha.controller.js";
 import { logging } from "./middlewares/logger.js";
 import errorHandler from "./errors/errorHandler.js";
@@ -9,8 +10,6 @@ import { ClientError, ServerError } from "./errors/ApiError.js";
 import { fileURLToPath } from "url";
 import path from "path";
 import { securityMiddleware } from "./middlewares/security.js";
-import cookieParser from "cookie-parser";
-import member from "./routes/memberRoutes.js";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -24,15 +23,13 @@ app.use(securityMiddleware());
 app.use("/static", express.static("static"));
 app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);
-app.post("/api/captcha", express.json(), cookieParser(), getCaptcha);
-
-// app.use("/api/members", member); // Uncomment this line to enable the member routes
-
+app.use("/api/members", memberRoutes);
 app.get("/api/credits", (req, res) => {
   res.sendFile("credits.json", {
     root: path.dirname(fileURLToPath(import.meta.url)),
   });
 });
+app.post("/api/captcha", express.json(), getCaptcha);
 
 app.use("/images/are/not/here", photoRoutes);
 

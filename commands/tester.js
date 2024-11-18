@@ -99,6 +99,16 @@ try {
     image: new RecordId("photo", pathStructure["podcasts"]["spandam.webp"]),
     mime: "mpeg",
   });
+
+  await db.create("member", {
+    name: "Monkey D. Luffy",
+    role: "Leader",
+    photos: Object.entries(pathStructure["members"]["luffy"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "Spandam, the Leader of CP9",
+    portfolio: "https://onepiece.fandom.com/wiki/Luffy",
+  });
 } catch (error) {
   console.error(
     "failed to migrate to surrealdb",
