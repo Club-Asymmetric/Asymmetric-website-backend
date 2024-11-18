@@ -11,8 +11,7 @@
     max_team_size: int,
     min_team_size: int,
     name: string,
-    photos: [ string(20)... ],
-    registration_end: "yyyy-mm-ddT00:00:00.000Z",
+    photos: [ string(20),... ],
     registration_start: "yyyy-mm-ddT00:00:00.000Z",
   },...
 ]
@@ -25,16 +24,11 @@
   date: "yyyy-mm-ddT00:00:00.000Z",
   description: string,
   id: string(20),
+  max_team_size: int,
+  min_team_size: int,
   name: string,
-  photos: [ string(20)... ],
-  registration_dates: [
-    "yyyy-mm-ddT00:00:00.000Z",
-    "yyyy-mm-ddT00:00:00.000Z",
-  ],
-  team_size: [
-    int,
-    int,
-  ],
+  photos: [ string(20),... ],
+  registration_start: "yyyy-mm-ddT00:00:00.000Z",
 }
 ```
 
@@ -46,11 +40,12 @@
 [
   {
     description: string,
-    guests: [ string... ],
+    guests: [ string,... ],
     id: string(20),
     image: string(20),
+    mime: string,
     name: string,
-    publish: "yyyy-mm-ddT00:00:00.000Z",
+    publish: bool,
   },...
 ]
 ```
@@ -60,12 +55,12 @@
 ```js
 {
   description: string,
-  guests: [ string... ],
+  guests: [ string,... ],
   id: string(20),
   image: string(20),
   mime: string,
   name: string,
-  publish: "yyyy-mm-ddT00:00:00.000Z",
+  publish: bool,
 }
 ```
 

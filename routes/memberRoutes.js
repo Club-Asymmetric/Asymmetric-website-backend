@@ -1,5 +1,5 @@
 import express from "express";
-import { getMemberById } from "../controllers/member.controller.js";
+// import { getMemberById } from "../controllers/member.controller.js";
 const router = express.Router();
 
 // Mock data for demonstration purposes

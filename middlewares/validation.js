@@ -4,61 +4,44 @@ import crypto from "crypto";
 import { ClientError } from "../errors/ApiError.js";
 
 export const validateForm = [
-  checkSchema({
-    name: {
-      trim: true,
-      notEmpty: {
-        errorMessage: "Name is required",
-      },
-    },
-    year: {
-      trim: true,
-      toInt: true,
-      notEmpty: {
-        errorMessage: "Current year is required",
-      },
-    },
-    department: {
-      trim: true,
-      notEmpty: {
-        errorMessage: "Department is required",
-      },
-    },
-    college: {
-      trim: true,
-      notEmpty: {
-        errorMessage: "College name is required",
-      },
-    },
-    email: {
-      trim: true,
-      notEmpty: {
-        errorMessage: "Email is required",
-      },
-      isEmail: {
-        errorMessage: "Invalid email format",
-      },
-    },
-    number: {
-      trim: true,
-      notEmpty: {
-        errorMessage: "Phone number is required",
-      },
-      isMobilePhone: {
-        errorMessage: "Invalid phone number",
-      },
-    },
-  }),
+  body("name").trim().notEmpty().withMessage("Name is required"),
+  body("year")
+    .trim()
+    .notEmpty()
+    .withMessage("Current year is required")
+    .toInt()
+    .isInt({ min: 0 })
+    .withMessage("Invalid year"),
+  body("department").trim().notEmpty().withMessage("Department is required"),
+  body("college").trim().notEmpty().withMessage("College name is required"),
+  body("email")
+    .trim()
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Invalid email format"),
+  body("number")
+    .trim()
+    .notEmpty()
+    .withMessage("Phone number is required")
+    .isMobilePhone()
+    .withMessage("Invalid phone number"),
+  body("team")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("Team name is required"),
+  body("token").trim().notEmpty().withMessage("Token is required"),
   body("captcha")
     .trim()
     .notEmpty()
     .withMessage("Captcha is required")
     .custom((value, { req }) => {
-      const token = req.cookies.token;
+      const { token } = req.body;
       if (!token) {
         throw ClientError.gone();
       }
-      const { hash, identifier, issuedAt } = jwt.verify(
+      const { hash, number, email, issuedAt } = jwt.verify(
         token,
         process.env.JWT_SECRET
       );
@@ -66,7 +49,6 @@ export const validateForm = [
       if (now - issuedAt < 20000) {
         throw ClientError.requestTimeout("Please Wait");
       }
-      const [number, email] = identifier.split(",");
       if (number != req.body.number || email != req.body.email) {
         throw ClientError.unauthorized("Invalid Captcha");
       }
@@ -76,7 +58,6 @@ export const validateForm = [
         throw ClientError.unauthorized("Invalid Captcha");
       }
     }),
-
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
