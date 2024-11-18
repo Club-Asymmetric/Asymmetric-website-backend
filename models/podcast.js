@@ -9,7 +9,7 @@ export async function getPodcast(id) {
   const out = (
     await (
       await database()
-    ).query("(SELECT *, image.id(), id.id() OMIT audio FROM $podcast)[0]", {
+    ).query("(SELECT *, image.id(), id.id() FROM $podcast)[0]", {
       podcast: new RecordId("podcast", id),
     })
   )[0];
@@ -19,9 +19,7 @@ export async function getPodcast(id) {
 
 export async function getAllPodcasts() {
   return (
-    await (
-      await database()
-    ).query("SELECT *, image.id(), id.id() OMIT mime FROM podcast")
+    await (await database()).query("SELECT *, image.id(), id.id() FROM podcast")
   )[0];
 }
 

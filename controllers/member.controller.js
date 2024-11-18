@@ -1,6 +1,6 @@
 import { ClientError } from "../errors/ApiError.js";
 import { getPhoto } from "../models/photo.js";
-import { getMemberDetail } from "../models/member.js";
+// import { getMemberDetail } from "../models/member.js";
 
 // Validate ID
 const validateId = (id) => {

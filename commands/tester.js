@@ -4,11 +4,11 @@ import path from "path";
 import fs from "fs/promises";
 import mime from "mime-types";
 import dotenv from "dotenv";
-import { Duration, RecordId } from "surrealdb";
+import { RecordId } from "surrealdb";
 
 dotenv.config();
 
-const db = await database("event_registrations");
+const db = await database();
 try {
   let pathStructure = {};
   async function recursiveRead(dir, cur = pathStructure) {
@@ -44,7 +44,7 @@ try {
       ([_, v]) => new RecordId("photo", v)
     ),
     registration_start: new Date(),
-    registration_end: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    location: "Saravana Bhavana",
     min_team_size: 1,
     max_team_size: 2,
     description: "Yonko Buggy's Livestream @ Marineford",
@@ -54,7 +54,7 @@ try {
     participants: 250,
     date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
     registration_start: new Date(),
-    registration_end: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    location: "Saravana Bhavana",
     min_team_size: 1,
     max_team_size: 2,
     photos: Object.entries(pathStructure["events"]["punkhazard"]).map(
@@ -67,7 +67,7 @@ try {
     participants: 8000,
     date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
     registration_start: new Date(),
-    registration_end: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    location: "Saravana Bhavana",
     min_team_size: 1,
     max_team_size: 2,
     photos: Object.entries(pathStructure["events"]["enieslobby"]).map(
@@ -77,7 +77,7 @@ try {
   });
   await db.create("podcast", {
     name: "Roger's Podcast",
-    publish: new Date(),
+    publish: true,
     guests: ["Roger"],
     description: "Roger, the King of the Pirates",
     image: new RecordId("photo", pathStructure["podcasts"]["roger.webp"]),
@@ -85,7 +85,7 @@ try {
   });
   await db.create("podcast", {
     name: "Buggy's Podcast",
-    publish: new Date(),
+    publish: true,
     guests: ["Buggy"],
     description: "Buggy, the Leader of the Cross Guild",
     image: new RecordId("photo", pathStructure["podcasts"]["buggy.webp"]),
@@ -93,7 +93,7 @@ try {
   });
   await db.create("podcast", {
     name: "Spandem's Podcast",
-    publish: new Date(),
+    publish: false,
     guests: ["Spandam"],
     description: "Spandam, the Leader of CP9",
     image: new RecordId("photo", pathStructure["podcasts"]["spandam.webp"]),

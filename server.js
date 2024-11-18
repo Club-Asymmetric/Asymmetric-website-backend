@@ -28,13 +28,6 @@ app.post("/api/captcha", express.json(), cookieParser(), getCaptcha);
 
 // app.use("/api/members", member); // Uncomment this line to enable the member routes
 
-app.use("/static", express.static("static"));
-app.get("/", (req, res) =>
-  res.sendFile("index.html", {
-    root: path.join(path.dirname(fileURLToPath(import.meta.url))),
-  })
-);
-
 app.get("/api/credits", (req, res) => {
   res.sendFile("credits.json", {
     root: path.dirname(fileURLToPath(import.meta.url)),
@@ -43,12 +36,7 @@ app.get("/api/credits", (req, res) => {
 
 app.use("/images/are/not/here", photoRoutes);
 
-app.get("/", (req, res) =>
-  res.sendFile("index.html", {
-    root: path.dirname(fileURLToPath(import.meta.url)),
-  })
-);
-
+// TODO: remove dis.
 import database from "./database.js";
 app.use("/photos", async (req, res) => {
   let output = "";

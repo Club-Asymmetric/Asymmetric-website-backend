@@ -16,48 +16,42 @@ export const getEventById = async (req, res, next) => {
   }
 };
 
-export const eventRegistration = async (req, res) => {
+export const eventRegistration = async (req, res, next) => {
   const { name, year, department, college, email, number, team, members } =
     req.body;
-
-  if (!name || !year || !department || !college || !email || !number) {
-    return res.status(400).json({
-      message: "All fields are required except team name and member name",
-    });
-  }
-
+  const event = req.params.id;
   try {
     const registration = new Registration({
       name,
-      currentYear,
+      year,
       department,
-      collegeName,
+      college,
       email,
-      phoneNumber,
+      number,
       event,
-      teamName,
-      memberName,
+      team,
+      members,
     });
-    await registration.save();
+    await registration.save(); // TODO:
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Error saving registration", error });
+    return next(error);
   }
 
-  res.status(201).json({
-    message: "Registration successful",
-    data: {
-      name,
-      currentYear,
-      department,
-      collegeName,
-      email,
-      phoneNumber,
-      event,
-      teamName,
-      memberName,
-    },
-  });
+  // TODO: Mail Bot, Download
+
+  // res.status(201).json({
+  //   message: "Registration successful",
+  //   data: {
+  //     name,
+  //     currentYear,
+  //     department,
+  //     collegeName,
+  //     email,
+  //     phoneNumber,
+  //     event,
+  //     teamName,
+  //     memberName,
+  //   },
+  // });
   res.send("Success");
 };
