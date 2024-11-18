@@ -99,6 +99,97 @@ try {
     image: new RecordId("photo", pathStructure["podcasts"]["spandam.webp"]),
     mime: "mpeg",
   });
+
+  await db.create("member", {
+    name: "Monkey D. Luffy",
+    role: "Leader",
+    photos: Object.entries(pathStructure["members"]["luffy"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "Strawhat",
+    portfolio: "https://onepiece.fandom.com/wiki/Luffy",
+  });
+  await db.create("member", {
+    name: "Roronoa Zoro",
+    role: "Swordsman",
+    photos: Object.entries(pathStructure["members"]["zoro"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "King of Hell",
+    portfolio: "https://onepiece.fandom.com/wiki/Zoro",
+  });
+  await db.create("member", {
+    name: "Nami",
+    role: "Navigator",
+    photos: Object.entries(pathStructure["members"]["nami"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "Cat Burglar",
+    portfolio: "https://onepiece.fandom.com/wiki/Nami",
+  });
+  await db.create("member", {
+    name: "Usopp",
+    role: "Sniper",
+    photos: Object.entries(pathStructure["members"]["usopp"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "Spandam, the Leader of CP9",
+    portfolio: "https://onepiece.fandom.com/wiki/Usopp",
+  });
+  await db.create("member", {
+    name: "Vinsmoke Sanji",
+    role: "Cook",
+    photos: Object.entries(pathStructure["members"]["sanji"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "Black Leg",
+    portfolio: "https://onepiece.fandom.com/wiki/Sanji",
+  });
+  await db.create("member", {
+    name: "Tony Tony Chopper",
+    role: "Doctor",
+    photos: Object.entries(pathStructure["members"]["chopper"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "Cotton Candy Lover",
+    portfolio: "https://onepiece.fandom.com/wiki/Chopper",
+  });
+  await db.create("member", {
+    name: "Nico Robin",
+    role: "Archaeologist",
+    photos: Object.entries(pathStructure["members"]["robin"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "Devil's Child",
+    portfolio: "https://onepiece.fandom.com/wiki/Robin",
+  });
+  await db.create("member", {
+    name: "Franky",
+    role: "Shipwright",
+    photos: Object.entries(pathStructure["members"]["luffy"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "Cyborg",
+    portfolio: "https://onepiece.fandom.com/wiki/Franky",
+  });
+  await db.create("member", {
+    name: "Brook",
+    role: "Musician",
+    photos: Object.entries(pathStructure["members"]["luffy"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "Soul King",
+    portfolio: "https://onepiece.fandom.com/wiki/Brook",
+  });
+  await db.create("member", {
+    name: "Jinbei",
+    role: "Helmsman",
+    photos: Object.entries(pathStructure["members"]["luffy"]).map(
+      ([_, v]) => new RecordId("photo", v)
+    ),
+    description: "First Son of the Sea",
+    portfolio: "https://onepiece.fandom.com/wiki/Jinbei",
+  });
 } catch (error) {
   console.error(
     "failed to migrate to surrealdb",
