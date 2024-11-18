@@ -39,7 +39,7 @@ export const validateForm = [
     .custom((value, { req }) => {
       const { token } = req.body;
       if (!token) {
-        throw ClientError.gone();
+        throw ClientError.unauthorized("You don't have Captcha");
       }
       const { hash, number, email, issuedAt } = jwt.verify(
         token,
@@ -47,10 +47,12 @@ export const validateForm = [
       );
       const now = Date.now();
       if (now - issuedAt < 20000) {
-        throw ClientError.requestTimeout("Please Wait");
+        throw ClientError.requestTimeout(
+          `Please Wait ${(now - issuedAt) / 1000}s`
+        );
       }
       if (number != req.body.number || email != req.body.email) {
-        throw ClientError.unauthorized("Invalid Captcha");
+        throw ClientError.unauthorized("Captcha has been Compromised");
       }
       if (hash === crypto.createHash("sha256").update(value).digest("hex")) {
         return true;
