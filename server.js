@@ -33,18 +33,6 @@ app.post("/api/captcha", express.json(), getCaptcha);
 
 app.use("/images/are/not/here", photoRoutes);
 
-// TODO: remove dis.
-import database from "./database.js";
-app.use("/photos", async (req, res) => {
-  let output = "";
-  for (let record of (
-    await (await database()).query("SELECT record::id(id) AS id FROM photo")
-  )[0]) {
-    output += `<img src="/if/you/get/these/images/you/are/gay/${record.id}">`;
-  }
-  res.send(output);
-});
-
 app.use((req, res) => {
   throw ClientError.notFound();
 });

@@ -10,7 +10,6 @@ export const getMemberById = async (req, res, next) => {
 };
 
 export const getMembers = async (req, res, next) => {
-  console.log("im here");
   try {
     res.json(await getAllMembers());
   } catch (error) {
