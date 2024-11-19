@@ -24,13 +24,14 @@ app.use("/static", express.static("static"));
 app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);
 app.use("/api/members", memberRoutes);
+
 app.get("/api/credits", (req, res) => {
   res.sendFile("credits.json", {
     root: path.dirname(fileURLToPath(import.meta.url)),
   });
 });
-app.post("/api/captcha", express.json(), getCaptcha);
 
+app.post("/api/captcha", express.json(), getCaptcha);
 app.use("/images/are/not/here", photoRoutes);
 
 app.use((req, res) => {
@@ -56,6 +57,7 @@ const cleaner = () => {
 
 process.on("SIGINT", cleaner);
 process.on("SIGTERM", cleaner);
+
 process.on("uncaughtException", (error) => {
   console.error(
     "Uncaught Exception:",
@@ -63,6 +65,7 @@ process.on("uncaughtException", (error) => {
   );
   cleaner();
 });
+
 process.on("unhandledRejection", (error) => {
   console.error(
     "Unhandled Rejection:",
