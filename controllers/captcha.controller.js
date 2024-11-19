@@ -1,10 +1,9 @@
 import jwt from "jsonwebtoken";
 import { ClientError } from "../errors/ApiError.js";
 import crypto from "crypto";
-import e from "express";
 
 // Function to generate a random case-sensitive and order-sensitive captcha
-function generateCaptcha(length = 8) {
+function generateCaptcha(length = process.env.CAPTCHA_SIZE || 10) {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";

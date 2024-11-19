@@ -1,4 +1,4 @@
-import { getEvent, getAllEvents } from "../models/event.js";
+import { getEvent, getAllEvents, registerForEvent } from "../models/event.js";
 
 export const getEvents = async (req, res, next) => {
   try {
@@ -17,22 +17,10 @@ export const getEventById = async (req, res, next) => {
 };
 
 export const eventRegistration = async (req, res, next) => {
-  const { name, year, department, college, email, number, team, members } =
-    req.body;
-  const event = req.params.id;
+  // console.log("I am here");
+  const { id } = req.params;
   try {
-    const registration = new Registration({
-      name,
-      year,
-      department,
-      college,
-      email,
-      number,
-      event,
-      team,
-      members,
-    });
-    await registration.save(); // TODO:
+    return res.json(await registerForEvent(id, req.body));
   } catch (error) {
     return next(error);
   }
