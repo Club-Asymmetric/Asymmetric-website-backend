@@ -31,45 +31,61 @@ export const validateForm = [
     .trim()
     .notEmpty()
     .withMessage("Team name is required"),
-  body("token").trim().notEmpty().withMessage("Token is required"),
+  body("token")
+    .trim()
+    .notEmpty()
+    .withMessage("Token is required")
+    .custom((value) => {
+      try {
+        jwt.verify(value, process.env.JWT_SECRET);
+        return true;
+      } catch (error) {
+        return false;
+      }
+    })
+    .withMessage("Invalid token")
+    .customSanitizer((value) => {
+      return jwt.verify(value, process.env.JWT_SECRET);
+    })
+    .custom((value) => {
+      const { email, number } = value;
+      if (!email || !number) {
+        return false;
+      } else {
+        return true;
+      }
+    })
+    .withMessage("Token has been compromised")
+    .custom((value) => {
+      const now = Date.now();
+      if (now - value.issuedAt > process.env.CAPTCHA_TIMEOUT * 1000) {
+        return false;
+      }
+      return true;
+    })
+    .withMessage(`Please wait...`),
   body("captcha")
     .trim()
     .notEmpty()
     .withMessage("Captcha is required")
     .custom((value, { req }) => {
-      const { token } = req.body;
-      if (!token) {
-        throw ClientError.unauthorized("You don't have Captcha");
+      if (
+        req.body.token.hash ===
+        crypto.createHash("sha256").update(value).digest("hex")
+      ) {
+        return true;
+      } else {
+        return false;
       }
-      try {
-        const { hash, number, email, issuedAt } = jwt.verify(
-          token,
-          process.env.JWT_SECRET
-        );
-        const now = Date.now();
-        if (now - issuedAt < process.env.CAPTCHA_TIMEOUT * 1000) {
-          throw ClientError.requestTimeout(
-            `Please Wait ${(now - issuedAt) / 1000}s`
-          );
-        }
-        if (number != req.body.number || email != req.body.email) {
-          throw ClientError.unauthorized("Captcha has been Compromised");
-        }
-        if (hash === crypto.createHash("sha256").update(value).digest("hex")) {
-          console.log("im here");
-          return true;
-        } else {
-          throw ClientError.unauthorized("Invalid Captcha");
-        }
-      } catch (error) {
-        console.log(error);
-        throw error;
-      } // TODO: token expire error
-    }),
+    })
+    .withMessage("Invalid Captcha"),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return next(ClientError.badRequest(errors.array()));
+      console.log(errors.array());
+      return res
+        .status(400)
+        .json({ message: "validation failed", errors: errors.array() }); // TODO: fix it
     }
     next();
   },
