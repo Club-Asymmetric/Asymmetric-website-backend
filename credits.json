@@ -1,19 +1,19 @@
 [
   {
+    "name": "THE LEGENDARY AK (Akshay Kumar)",
+    "contributions": "UI/UX Designer"
+  },
+  {
     "name": "Linngeshwar",
-    "contributors": "Events Page and IndividualMembers Page"
+    "contributions": "Events Page and IndividualMembers Page"
   },
   {
     "name": "Mohamed Sameer S",
-    "contributors": "Podcast Page and GroupPhoto Page"
+    "contributions": "Podcast Page and GroupPhoto Page"
   },
   {
     "name": "Hemanth Raj",
-    "contributors": "Home Page and AboutUs Page and ContactUs Page"
-  },
-  {
-    "name": "Akshay Kumar",
-    "contributors": "UI/UX Designer"
+    "contributions": "Home Page, AboutUs Page and ContactUs Page"
   },
   {
     "name": "Vishal",
@@ -25,22 +25,22 @@
   },
   {
     "name": "Vanathi",
-    "contributors": "Content for Home and AboutUs Page"
+    "contributions": "Content for Home and AboutUs Page"
   },
   {
     "name": "Alwin Arul Shelvan",
-    "contributors": "Event Details"
+    "contributions": "Event Details"
   },
   {
     "name": "Jayakaran",
-    "contributors": "Podcast Details"
+    "contributions": "Podcast Details"
   },
   {
     "name": "Akshaya S & Kaviyasree",
-    "contributors": "Individual Photos"
+    "contributions": "Individual Photos"
   },
   {
     "name": "Kaviya",
-    "contributors": "Group Photos"
+    "contributions": "Group Photos"
   }
 ]
