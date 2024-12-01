@@ -1,13 +1,11 @@
 [
   {
     "name": "Vishal",
-    "contribution": "Backend Developer",
-    "role": "Project Manager"
+    "contributors": "Backend Developer"
   },
   {
     "name": "Samuel Jabez P",
-    "contribution": "Backend Developer",
-    "role": "Database Manager"
+    "contributors": "Backend Developer"
   },
   {
     "name": "Akshay Kumar",
@@ -15,25 +13,18 @@
   },
   {
     "name": "Hemanth raj",
-    "contribution": "Frontend Developer",
-    "role": "Technical Lead"
+    "contributors": "Frontend Developer"
   },
   {
-    "name": "Linngeshwar",
-    "contribution": "Frontend Developer",
-    "role": "Vice-President"
+    "name": "Linngeshwar ",
+    "contributors": "Frontend Developer"
   },
   {
     "name": "Mohamed Sameer S",
     "contribution": "Frontend Developer"
   },
   {
-    "name": "krishna kumar",
-    "contribution": "Backend Developer"
-  },
-  {
     "name": "Akshaya",
-    "contribution": "Support and Assistance",
-    "role": "Secretary"
+    "contributors": "Support and Assistance"
   }
 ]
