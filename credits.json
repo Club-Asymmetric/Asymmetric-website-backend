@@ -1,30 +1,47 @@
 [
   {
-    "name": "Vishal",
-    "contributions": "Backend Developer"
-  },
-  {
-    "name": "Samuel Jabez P",
-    "contributions": "Backend Developer"
-  },
-  {
-    "name": "Akshay Kumar",
+    "name": "THE LEGENDARY AK (Akshay Kumar)",
     "contributions": "UI/UX Designer"
   },
   {
-    "name": "Hemanth raj",
-    "contributions": "Frontend Developer"
-  },
-  {
-    "name": "Linngeshwar ",
-    "contributions": "Frontend Developer"
+    "name": "Linngeshwar",
+    "contributions": "Events Page and IndividualMembers Page"
   },
   {
     "name": "Mohamed Sameer S",
-    "contributions": "Frontend Developer"
+    "contributions": "Podcast Page and GroupPhoto Page"
   },
   {
-    "name": "Akshaya",
-    "contributions": "Support and Assistance"
+    "name": "Hemanth Raj",
+    "contributions": "Home Page, AboutUs Page and ContactUs Page"
+  },
+  {
+    "name": "Samuel Jabez P",
+    "contributions": "Backend Developer and datebase developer"
+  },
+  {
+    "name": "Vishal",
+    "contributions": "Backend Developer"
+  },
+
+  {
+    "name": "Vanathi",
+    "contributions": "Content for Home and AboutUs Page"
+  },
+  {
+    "name": "Alwin Arul Shelvan",
+    "contributions": "Event Details"
+  },
+  {
+    "name": "Jayakaran",
+    "contributions": "Podcast Details"
+  },
+  {
+    "name": "Akshaya S & Kaviyasree",
+    "contributions": "Individual Photos"
+  },
+  {
+    "name": "Kaviya",
+    "contributions": "Group Photos"
   }
 ]
