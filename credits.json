@@ -1,5 +1,21 @@
 [
   {
+    "name": "Linngeshwar",
+    "contributors": "Events Page and IndividualMembers Page"
+  },
+  {
+    "name": "Mohamed Sameer S",
+    "contributors": "Podcast Page and GroupPhoto Page"
+  },
+  {
+    "name": "Hemanth Raj",
+    "contributors": "Home Page and AboutUs Page and ContactUs Page"
+  },
+  {
+    "name": "Akshay Kumar",
+    "contributors": "UI/UX Designer"
+  },
+  {
     "name": "Vishal",
     "contributors": "Backend Developer"
   },
@@ -8,23 +24,23 @@
     "contributors": "Backend Developer"
   },
   {
-    "name": "Akshay Kumar",
-    "contributors": "UI/UX Designer"
+    "name": "Vanathi",
+    "contributors": "Content for Home and AboutUs Page"
   },
   {
-    "name": "Hemanth raj",
-    "contributors": "Frontend Developer"
+    "name": "Alwin Arul Shelvan",
+    "contributors": "Event Details"
   },
   {
-    "name": "Linngeshwar ",
-    "contributors": "Frontend Developer"
+    "name": "Jayakaran",
+    "contributors": "Podcast Details"
   },
   {
-    "name": "Mohamed Sameer S",
-    "contributors": "Frontend Developer"
+    "name": "Akshaya S & Kaviyasree",
+    "contributors": "Individual Photos"
   },
   {
-    "name": "Akshaya",
-    "contributors": "Support and Assistance"
+    "name": "Kaviya",
+    "contributors": "Group Photos"
   }
 ]
