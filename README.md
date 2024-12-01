@@ -72,8 +72,7 @@
 [
   {
     name: string,
-    contribution: string,
-    role: string,
+    contributions: string,
   },...
 ]
 ```
