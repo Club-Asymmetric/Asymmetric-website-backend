@@ -11,7 +11,7 @@
     max_team_size: int,
     min_team_size: int,
     name: string,
-    photos: [ string(20),... ],
+    photos: [ string(20)... ],
     registration_start: "yyyy-mm-ddT00:00:00.000Z",
   },...
 ]
@@ -27,7 +27,7 @@
   max_team_size: int,
   min_team_size: int,
   name: string,
-  photos: [ string(20),... ],
+  photos: [ string(20)... ],
   registration_start: "yyyy-mm-ddT00:00:00.000Z",
 }
 ```
@@ -40,7 +40,7 @@
 [
   {
     description: string,
-    guests: [ string,... ],
+    guests: [ string... ],
     id: string(20),
     image: string(20),
     mime: string,
@@ -55,7 +55,7 @@
 ```js
 {
   description: string,
-  guests: [ string,... ],
+  guests: [ string... ],
   id: string(20),
   image: string(20),
   mime: string,
@@ -65,3 +65,52 @@
 ```
 
 ## `GET /api/podcast/string(20)/stream` -> audio
+
+## `GET /api/credits`
+
+```js
+[
+  {
+    name: string,
+    contribution: string,
+    role: string,
+  },...
+]
+```
+
+## `GET /api/members`
+
+```js
+[
+  {
+    description: string,
+    id: string(20),
+    name: string,
+    photos: [ string(20)... ],
+    portfolio: string,
+    role: string,
+  },...
+]
+```
+
+## `GET /api/members/string(20)`
+
+```js
+{
+  description: string,
+  id: string(20),
+  name: string,
+  photos: [ string(20)... ],
+  portfolio: string,
+  role: string,
+}
+```
+
+## `GET /api/captcha`
+
+```js
+{
+  captcha: string,
+  token: string,
+}
+```
