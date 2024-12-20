@@ -105,11 +105,11 @@
 }
 ```
 
-## `GET /api/captcha`
+<!-- ## `GET /api/captcha`
 
 ```js
 {
   captcha: string,
   token: string,
 }
-```
+``` -->
