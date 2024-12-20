@@ -1,3 +1,7 @@
+# Test Server
+
+`npm run tserver`
+
 # API documentation
 
 ## `GET /api/events` Response:
