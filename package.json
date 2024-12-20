@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "tester": "node commands/tester.js",
-    "untester": "node commands/untester.js"
+    "untester": "node commands/untester.js",
+    "tserver": "nodemon tserver.js"
   },
   "keywords": [],
   "author": "",
