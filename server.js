@@ -31,7 +31,7 @@ app.get("/api/credits", (req, res) => {
   });
 });
 
-app.post("/api/captcha", express.json(), getCaptcha);
+// app.post("/api/captcha", express.json(), getCaptcha);
 app.use("/images/are/not/here", photoRoutes);
 
 app.use((req, res) => {
