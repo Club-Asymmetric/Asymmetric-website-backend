@@ -12,11 +12,14 @@
     date: "yyyy-mm-ddT00:00:00.000Z",
     description: string,
     id: string(20),
+    location: string,
     max_team_size: int,
     min_team_size: int,
     name: string,
+    participants: int,
     photos: [ string(20)... ],
     registration_start: "yyyy-mm-ddT00:00:00.000Z",
+    synopsis: string,
   },...
 ]
 ```
@@ -28,11 +31,14 @@
   date: "yyyy-mm-ddT00:00:00.000Z",
   description: string,
   id: string(20),
+  location: string,
   max_team_size: int,
   min_team_size: int,
   name: string,
+  participants: int,
   photos: [ string(20)... ],
   registration_start: "yyyy-mm-ddT00:00:00.000Z",
+  synopsis: string,
 }
 ```
 
@@ -87,11 +93,16 @@
 [
   {
     description: string,
+    dimension: string,
+    energy: string,
+    features: string,
+    hobbies: string,
     id: string(20),
     name: string,
     photos: [ string(20)... ],
     portfolio: string,
     role: string,
+    type: string,
   },...
 ]
 ```
@@ -101,11 +112,16 @@
 ```js
 {
   description: string,
+  dimension: string,
+  energy: string,
+  features: string,
+  hobbies: string,
   id: string(20),
   name: string,
   photos: [ string(20)... ],
   portfolio: string,
   role: string,
+  type: string,
 }
 ```
 

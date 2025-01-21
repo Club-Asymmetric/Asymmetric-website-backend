@@ -106,7 +106,7 @@ const events = {
       'Step into the twisted brilliance of Caesar Clown as he unveils his deadliest creation, Shinokuni, at an exclusive underground auction! Witness the ultimate showcase of scientific horror as the infamous "Master of Gas" demonstrates the power of his lethal weapon, capable of wiping out entire nations.\n\nThis high-stakes event is not for the faint-hearted—elite buyers from the underworld, warlords, and rogue nations are invited to bid on this destructive masterpiece. Expect dazzling displays of terror, Caesar’s eccentric commentary, and perhaps a few "accidental" test subjects!\n\nWill Shinokuni become the most feared weapon in history? Or will Caesar’s grand event spiral into chaos under his unpredictable genius? Join us for a sinister spectacle where danger and drama are guaranteed!\n\nNote: Attendees are advised to bring protective gear… just in case.',
     synopsis:
       "Caesar Clown hosts a sinister auction, showcasing the deadly Shinokuni weapon to the underworld's elite in a spectacle of chaos and terror!",
-    redirect: null,
+    redirect: undefined,
   },
   "0000000000enieslobby": {
     id: "0000000000enieslobby",
@@ -126,7 +126,7 @@ const events = {
       'Step into the masked hero’s boots and relive the epic saga of Enies Lobby through the eyes of the legendary Sogeking! In this thrilling event, dive into his "secret diaries," where truth and imagination collide to recount daring rescues, fiery battles, and heroic feats (with just a dash of exaggeration).\n\nFrom firing the iconic Firebird Star to inspiring his crew with unmatched bravery, Sogeking takes you on a wild adventure filled with action, laughter, and heart. As the Straw Hats face off against CP9 to rescue Nico Robin, uncover untold stories, secret strategies, and the masked marksman’s "hidden" role in shaping the legend of Enies Lobby!\n\nJoin Sogeking for an unforgettable journey where the line between myth and reality blurs—because every hero deserves their moment to shine!',
     synopsis:
       "Join Sogeking on a wild adventure through his secret diaries, reliving the legendary events of Enies Lobby with a heroic twist!",
-    redirect: null,
+    redirect: undefined,
   },
 };
 
