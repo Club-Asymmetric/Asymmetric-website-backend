@@ -11,12 +11,12 @@ import {
 
 router.get("/:id", getEventById);
 router.get("/", getEvents);
-router.post(
-  "/:id/register",
-  rateLimiter,
-  express.json(),
-  validateForm,
-  eventRegistration
-);
+// router.post(
+//   "/:id/register",
+//   rateLimiter,
+//   express.json(),
+//   validateForm,
+//   eventRegistration
+// );
 
 export default router;
