@@ -90,3 +90,73 @@ export const validateForm = [
     next();
   },
 ];
+
+const handleValidation = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res
+      .status(400)
+      .json({ message: "validation failed", errors: errors.array() });
+  }
+  next();
+};
+
+export const validateRegistration = [
+  body("name").trim().notEmpty().withMessage("Name is required"),
+  body("teamName").optional({ checkFalsy: true }).trim(),
+  body("collegeName")
+    .trim()
+    .notEmpty()
+    .withMessage("College name is required"),
+  body("mailId")
+    .trim()
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Invalid email format"),
+  body("mobileNumber")
+    .trim()
+    .notEmpty()
+    .withMessage("Phone number is required")
+    .isMobilePhone()
+    .withMessage("Invalid phone number"),
+  body("event").trim().notEmpty().withMessage("Event is required"),
+  body("teamMembers")
+    .optional()
+    .isArray()
+    .withMessage("Team members must be a list"),
+  body("teamMembers.*.name")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("Team member name is required"),
+  body("teamMembers.*.department")
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage("Team member department is required"),
+  handleValidation,
+];
+
+export const validateContact = [
+  body("name").trim().notEmpty().withMessage("Name is required"),
+  body("mailId")
+    .trim()
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Invalid email format"),
+  body("mobileNumber")
+    .optional({ checkFalsy: true })
+    .trim()
+    .isMobilePhone()
+    .withMessage("Invalid phone number"),
+  body("topic").trim().notEmpty().withMessage("Topic is required"),
+  body("message")
+    .trim()
+    .notEmpty()
+    .withMessage("Message is required")
+    .isLength({ max: 500 })
+    .withMessage("Message is too long"),
+  handleValidation,
+];

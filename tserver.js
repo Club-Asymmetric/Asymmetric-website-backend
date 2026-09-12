@@ -5,6 +5,9 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import fs from "fs";
 import errorHandler from "./errors/errorHandler.js";
+import { securityMiddleware } from "./middlewares/security.js";
+import registrationRoutes from "./routes/registration.routes.js";
+import contactRoutes from "./routes/contact.routes.js";
 
 dotenv.config();
 const photos = {
@@ -365,6 +368,10 @@ const members = {
 
 const app = express();
 
+app.use(securityMiddleware());
+app.use("/api/register", registrationRoutes);
+app.use("/api/contact", contactRoutes);
+
 app.get("/api/events", (req, res) => {
   res.json(events);
 });
@@ -431,6 +438,8 @@ app.get("/api/credits", (req, res) => {
     root: path.dirname(fileURLToPath(import.meta.url)),
   });
 });
+
+app.use(errorHandler);
 
 app.listen(3000, () => {
   console.log("server start in http://localhost:3000");

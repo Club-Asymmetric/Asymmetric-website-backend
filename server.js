@@ -4,6 +4,8 @@ import eventRoutes from "./routes/event.routes.js";
 import photoRoutes from "./routes/photo.routes.js";
 import podcastRoutes from "./routes/podcast.routes.js";
 import memberRoutes from "./routes/member.routes.js";
+import registrationRoutes from "./routes/registration.routes.js";
+import contactRoutes from "./routes/contact.routes.js";
 import { getCaptcha } from "./controllers/captcha.controller.js";
 import { logging } from "./middlewares/logger.js";
 import errorHandler from "./errors/errorHandler.js";
@@ -25,6 +27,8 @@ app.use("/static", express.static("static"));
 app.use("/api/events", eventRoutes);
 app.use("/api/podcasts", podcastRoutes);
 app.use("/api/members", memberRoutes);
+app.use("/api/register", registrationRoutes);
+app.use("/api/contact", contactRoutes);
 
 app.get("/api/credits", (req, res) => {
   res.sendFile("credits.json", {
