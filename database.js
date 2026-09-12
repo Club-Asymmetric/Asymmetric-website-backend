@@ -1,17 +1,14 @@
 import { Surreal } from "surrealdb";
-import { surrealdbNodeEngines } from "@surrealdb/node";
 
 let db;
 export default async () => {
   if (db) return db;
-  db = new Surreal({
-    engines: surrealdbNodeEngines(),
-  });
+  db = new Surreal();
   try {
     await db.connect("http://localhost:8000/rpc", {
       namespace: "asymmetric",
       database: "asymmetric",
-      auth: {
+      authentication: {
         username: process.env.SURREAL_USER,
         password: process.env.SURREAL_PASS,
       },

@@ -1,4 +1,5 @@
 import express from "express";
+import database from "./database.js";
 import eventRoutes from "./routes/event.routes.js";
 import photoRoutes from "./routes/photo.routes.js";
 import podcastRoutes from "./routes/podcast.routes.js";
