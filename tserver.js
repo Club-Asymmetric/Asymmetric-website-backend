@@ -8,6 +8,7 @@ import errorHandler from "./errors/errorHandler.js";
 import { securityMiddleware } from "./middlewares/security.js";
 import registrationRoutes from "./routes/registration.routes.js";
 import contactRoutes from "./routes/contact.routes.js";
+import memberApplicationRoutes from "./routes/memberApplication.routes.js";
 
 dotenv.config();
 const photos = {
@@ -371,6 +372,7 @@ const app = express();
 app.use(securityMiddleware());
 app.use("/api/register", registrationRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/member-application", memberApplicationRoutes);
 
 app.get("/api/events", (req, res) => {
   res.json(events);

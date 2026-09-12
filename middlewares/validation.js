@@ -138,6 +138,29 @@ export const validateRegistration = [
   handleValidation,
 ];
 
+export const validateMemberApplication = [
+  body("name").trim().notEmpty().withMessage("Name is required"),
+  body("mailId")
+    .trim()
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Invalid email format"),
+  body("contactNumber")
+    .trim()
+    .notEmpty()
+    .withMessage("Contact number is required")
+    .isMobilePhone()
+    .withMessage("Invalid contact number"),
+  body("department").trim().notEmpty().withMessage("Department is required"),
+  body("year").trim().notEmpty().withMessage("Year is required"),
+  body("track").trim().notEmpty().withMessage("Track is required"),
+  body("linkedIn").optional({ checkFalsy: true }).trim().isURL().withMessage("Invalid LinkedIn URL"),
+  body("github").optional({ checkFalsy: true }).trim().isURL().withMessage("Invalid GitHub URL"),
+  body("description").trim().notEmpty().withMessage("Description is required"),
+  handleValidation,
+];
+
 export const validateContact = [
   body("name").trim().notEmpty().withMessage("Name is required"),
   body("mailId")
