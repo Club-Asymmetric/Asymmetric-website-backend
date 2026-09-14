@@ -52,8 +52,9 @@ app.use((req, res) => {
 // Centralized Error Handler
 app.use(errorHandler);
 
-const server = app.listen(3000, () => {
-  console.log("server start in http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+const server = app.listen(PORT, () => {
+  console.log(`server start in http://localhost:${PORT}`);
 });
 
 const cleaner = () => {
