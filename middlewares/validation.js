@@ -157,6 +157,7 @@ export const validateMemberApplication = [
   body("track").trim().notEmpty().withMessage("Track is required"),
   body("linkedIn").optional({ checkFalsy: true }).trim().isURL().withMessage("Invalid LinkedIn URL"),
   body("github").optional({ checkFalsy: true }).trim().isURL().withMessage("Invalid GitHub URL"),
+  body("resumeLink").optional({ checkFalsy: true }).trim().isURL().withMessage("Invalid resume link"),
   body("description").trim().notEmpty().withMessage("Description is required"),
   handleValidation,
 ];
