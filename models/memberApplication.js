@@ -1,5 +1,5 @@
 import { ClientError } from "../errors/ApiError.js";
-import { getDb, getBucket } from "../utils/firebaseAdmin.js";
+import { getDb } from "../utils/firebaseAdmin.js";
 import { getSheetByTitle } from "../utils/googleSheets.js";
 
 const COLLECTION = "member_applications";
@@ -17,20 +17,18 @@ const SHEET_HEADER = [
   "Resume URL",
 ];
 
-export async function submitMemberApplication(
-  {
-    name,
-    mailId,
-    contactNumber,
-    department,
-    year,
-    track,
-    linkedIn,
-    github,
-    description,
-  },
-  resumeFile
-) {
+export async function submitMemberApplication({
+  name,
+  mailId,
+  contactNumber,
+  department,
+  year,
+  track,
+  linkedIn,
+  github,
+  description,
+  resumeLink,
+}) {
   const applications = getDb().collection(COLLECTION);
 
   const [mailSnap, phoneSnap] = await Promise.all([
@@ -42,16 +40,7 @@ export async function submitMemberApplication(
   if (!phoneSnap.empty)
     throw ClientError.conflict("This contact number is already used");
 
-  let resumeUrl = null;
-  if (resumeFile) {
-    const path = `resumes/${Date.now()}-${resumeFile.originalname}`;
-    const blob = getBucket().file(path);
-    await blob.save(resumeFile.buffer, {
-      contentType: resumeFile.mimetype,
-    });
-    await blob.makePublic();
-    resumeUrl = blob.publicUrl();
-  }
+  const resumeUrl = resumeLink || null;
 
   const doc = {
     name,
