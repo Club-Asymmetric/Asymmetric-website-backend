@@ -1,7 +1,21 @@
 import { ClientError } from "../errors/ApiError.js";
 import { getDb, getBucket } from "../utils/firebaseAdmin.js";
+import { getSheetByTitle } from "../utils/googleSheets.js";
 
 const COLLECTION = "member_applications";
+const SHEET_HEADER = [
+  "Timestamp",
+  "Name",
+  "Email",
+  "Contact Number",
+  "Department",
+  "Year",
+  "Track",
+  "LinkedIn",
+  "GitHub",
+  "Description",
+  "Resume URL",
+];
 
 export async function submitMemberApplication(
   {
@@ -54,6 +68,26 @@ export async function submitMemberApplication(
   };
 
   const ref = await applications.add(doc);
+
+  // Also append to Google Sheets under "MemberApplications" tab
+  try {
+    const sheet = await getSheetByTitle("MemberApplications", SHEET_HEADER);
+    await sheet.addRow({
+      Timestamp: new Date().toISOString(),
+      Name: name,
+      Email: mailId,
+      "Contact Number": contactNumber,
+      Department: department,
+      Year: year,
+      Track: track,
+      LinkedIn: linkedIn || "",
+      GitHub: github || "",
+      Description: description,
+      "Resume URL": resumeUrl || "",
+    });
+  } catch (sheetErr) {
+    console.error("Failed to record member application in Google Sheet:", sheetErr.message);
+  }
 
   return { id: ref.id, resumeUrl };
 }
