@@ -6,14 +6,20 @@ let doc;
 async function getDoc() {
   if (doc) return doc;
 
+  const rawKey = process.env.GOOGLE_PRIVATE_KEY || "";
+  const key = rawKey
+    .replace(/^["'\s]+|["',\s]+$/g, "")
+    .replace(/\\n/g, "\n");
+
   const auth = new JWT({
     email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    key,
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 
-  doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, auth);
-  await doc.loadInfo();
+  const instance = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, auth);
+  await instance.loadInfo();
+  doc = instance;
   return doc;
 }
 

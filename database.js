@@ -4,8 +4,9 @@ let db;
 export default async () => {
   if (db) return db;
   db = new Surreal();
+  const surrealUrl = process.env.SURREAL_URL || "http://localhost:8000/rpc";
   try {
-    await db.connect("http://localhost:8000/rpc", {
+    await db.connect(surrealUrl, {
       namespace: "asymmetric",
       database: "asymmetric",
       authentication: {

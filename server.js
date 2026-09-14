@@ -32,6 +32,14 @@ app.use("/api/register", registrationRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/member-application", memberApplicationRoutes);
 
+app.get("/", (req, res) => {
+  res.json({ message: "Asymmetric Website API Server is running" });
+});
+
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "OK" });
+});
+
 app.get("/api/credits", (req, res) => {
   res.sendFile("credits.json", {
     root: path.dirname(fileURLToPath(import.meta.url)),
@@ -52,8 +60,9 @@ app.use((req, res) => {
 // Centralized Error Handler
 app.use(errorHandler);
 
-const server = app.listen(3000, () => {
-  console.log("server start in http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+const server = app.listen(PORT, () => {
+  console.log(`server start in http://localhost:${PORT}`);
 });
 
 const cleaner = () => {
